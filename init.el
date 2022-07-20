@@ -31,46 +31,33 @@
   '(;; makes handling lisp expressions much, much easier
     ;; Cheatsheet: http://www.emacswiki.org/emacs/PareditCheatsheet
     paredit
-
     flycheck
-    
     ;; key bindings and code colorization for Clojure
     ;; https://github.com/clojure-emacs/clojure-mode
-    clojure-mode
-    
+    clojure-mode 
     ;; extra syntax highlighting for clojure
     clojure-mode-extra-font-locking
-
     flycheck-clj-kondo
-
     ;; integration with a Clojure REPL
     ;; https://github.com/clojure-emacs/cider
     cider
-
     ;; Enhances M-x to allow easier execution of commands. Provides
     ;; a filterable list of possible commands in the minibuffer
     ;; http://www.emacswiki.org/emacs/Smex
     smex
-    
     ;; project navigation
     projectile
-
     ;; Javascript and Web in general related stuff
     ;; we need to move this stuff to other
     ;; file (when I have time to play around it on the weekend)
     web-mode
-    
     prettier-js
-
     ;; python related stuff
     elpy
-
     ;; edit html tags like sexps
     tagedit
-
     ;; git integration
     magit
-    
     ;; for copy/paste support between the terminal and the window system
     xclip
     ;; solarized-theme (my fav :$)
@@ -90,10 +77,6 @@
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
-
-
-(require 'cider)
-(add-to-list 'load-path "~/.emacs.d/elpa/cider")
 
 ;; Place downloaded elisp files in ~/.emacs.d/vendor. You'll then be able
 ;; to load them.
@@ -176,17 +159,15 @@
 (global-set-key (kbd "C-c =") 'comment-region)
 (global-set-key (kbd "C-c -") 'uncomment-region)
 
-;; linum
-(set-face-foreground 'linum "#00FFFF")
-(setq linum-format " %3d")
-
-;;turn off menu bar
-(menu-bar-mode 0)
-
-
 ;; enable xclip mode by default 
 (xclip-mode 1)
+
 ;; treats emacs region as typical outside of emacs
 ;; pasting on some selected text removes it
 ;; same as deleting it
 (delete-selection-mode 1)
+
+;; linum stuff
+(setq linum-format " %3d")
+(set-face-foreground 'linum "#00FFFF")
+

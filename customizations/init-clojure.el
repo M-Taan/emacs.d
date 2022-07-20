@@ -2,6 +2,11 @@
 ;; Clojure
 ;;;;
 
+
+(require 'cider)
+
+(add-to-list 'load-path "~/.emacs.d/elpa/cider")
+
 ;; Enable paredit for Clojure
 (add-hook 'clojure-mode-hook 'enable-paredit-mode)
 
