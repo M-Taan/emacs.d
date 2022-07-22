@@ -177,6 +177,6 @@
 (delete-selection-mode 1)
 
 ;; linum stuff
-(setq linum-format "%4d \u2502 ")
+(setq linum-format "%4d \u2502")
 (set-face-foreground 'linum "#00FFFF")
 
