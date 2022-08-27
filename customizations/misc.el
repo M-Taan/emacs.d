@@ -10,3 +10,6 @@
 
 ;; Go straight to scratch buffer on startup
 (setq inhibit-startup-message t)
+
+;; run commands fast
+(global-set-key (kbd "C-c c") 'counsel-compile)

@@ -1,7 +1,4 @@
-;;;;
-;; Clojure
-;;;;
-
+;; Clojure <3
 
 (require 'cider)
 

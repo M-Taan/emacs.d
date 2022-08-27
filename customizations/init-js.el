@@ -1,3 +1,5 @@
+;; Javascript
+
 ;; auto-enable for .js/.jsx files
 (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
 
