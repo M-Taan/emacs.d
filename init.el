@@ -1,6 +1,4 @@
-;;;;
 ;; Packages
-;;;;
 
 ;; Define package repositories
 (require 'package)
@@ -71,17 +69,6 @@
     ;; solarized-theme (my fav :$)
     solarized-theme))
 
-;; On OS X, an Emacs instance started from the graphical user
-;; interface will have a different environment than a shell in a
-;; terminal window, because OS X does not run a shell during the
-;; login. Obviously this will lead to unexpected results when
-;; calling external utilities like make from Emacs.
-;; This library works around this problem by copying important
-;; environment variables from the user's shell.
-;; https://github.com/purcell/exec-path-from-shell
-(if (eq system-type 'darwin)
-    (add-to-list 'my-packages 'exec-path-from-shell))
-
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
@@ -93,10 +80,6 @@
 ;; Add a directory to our load path so that when you `load` things
 ;; below, Emacs knows where to look for the corresponding file.
 (add-to-list 'load-path "~/.emacs.d/customizations")
-
-;; Sets up exec-path-from-shell so that Emacs will use the correct
-;; environment variables
-(load "shell-integration.el")
 
 ;; These customizations make it easier for you to navigate files,
 ;; switch buffers, and choose options from the minibuffer.
@@ -141,6 +124,7 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Deja Vu Mono" :slant normal :weight normal :height 140 :width normal))))
  '(counsel--mark-ring-highlight ((t (:inherit default))))
+ '(counsel-outline-default ((t (:inherit minibuffer-prompt))))
  '(font-lock-builtin-face ((t (:foreground "brightgreen" :slant normal :weight bold))))
  '(highlight ((t (:background "black"))))
  '(ivy-current-match ((t (:extend t :background "#E91E63" :underline t :weight bold))))
@@ -150,10 +134,12 @@
  '(ivy-prompt-match ((t (:inherit ivy-current-match))))
  '(line-number ((t (:inherit default :background "white"))))
  '(line-number-current-line ((t (:inherit line-number :background "white smoke"))))
- '(minibuffer-prompt ((t (:foreground "#E91E63"))))
+ '(minibuffer-prompt ((t (:foreground "#E91E63" :weight ultra-bold))))
  '(paren-face-match ((t (:inherit \(show-paren-match\)))))
  '(paren-face-no-match ((t (:inherit \(show-paren-mismatch\))))))
 
+
+;; This stuff below needs to be separated into their designated files (editing, keybinds, etc...) 
 
 ;;autocomplete
 (global-company-mode)
@@ -161,7 +147,7 @@
 (global-set-key (kbd "TAB") #'indent-for-tab-command)
 
 
-;; custom key binds
+;; comment/uncoment regions
 (global-set-key (kbd "C-c =") 'comment-region)
 (global-set-key (kbd "C-c -") 'uncomment-region)
 
