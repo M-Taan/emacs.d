@@ -19,6 +19,9 @@
 ;; No cursor blinking, it sucks
 (blink-cursor-mode 0)
 
+(setq-default cursor-type 'bar)
+
+
 ;; full path in title bar
 (setq-default frame-title-format "%b (%f)")
 
@@ -27,6 +30,4 @@
 
 ;; no bell
 (setq ring-bell-function 'ignore)
-
-;; counsel and ivy faces
 

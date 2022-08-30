@@ -1,13 +1,5 @@
 ;; Customizations relating to editing a buffer.
 
-;; Lisp-friendly hippie expand
-(setq hippie-expand-try-functions-list
-      '(try-expand-dabbrev
-        try-expand-dabbrev-all-buffers
-        try-expand-dabbrev-from-kill
-        try-complete-lisp-symbol-partially
-        try-complete-lisp-symbol))
-
 ;; Highlights matching parenthesis
 (show-paren-mode 1)
 
