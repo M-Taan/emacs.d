@@ -66,6 +66,9 @@
     ivy-prescient
 
     company-prescient
+
+    ;; support for YAML
+    yaml-mode
     
     ;; expermintal
     xclip
@@ -106,6 +109,7 @@
 (load "init-js.el")
 (load "init-php.el")
 (load "init-py.el")
+(load "init-yaml.el")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -120,7 +124,12 @@
    '(spacemacs-theme xclip company-prescient ivy-prescient counsel magit tagedit elpy prettier-js web-mode projectile cider flycheck-clj-kondo clojure-mode-extra-font-locking clojure-mode flycheck paredit)))
 
  ;; custom faces
-(custom-set-faces)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
  
 ;; font of choice
 (add-to-list 'default-frame-alist
