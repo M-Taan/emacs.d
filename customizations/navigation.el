@@ -1,11 +1,12 @@
 ;; ivy mode on
 (ivy-mode 1)
 
-;; Shows a list of buffers
-(global-set-key (kbd "C-x b") 'counsel-switch-buffer)
+(counsel-mode 1)
 
-;; super enhance M-x
-(global-set-key (kbd "M-x") 'counsel-M-x)
+;; needs to run after ivy is enabled
+(ivy-prescient-mode 1)
+
+(global-set-key (kbd "C-x b") 'counsel-switch-buffer)
 
 ;; projectile everywhere!
 (projectile-global-mode)
