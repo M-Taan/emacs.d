@@ -8,8 +8,8 @@
 ;; No need for ~ files when editing
 (setq create-lockfiles nil)
 
-;; Go straight to scratch buffer on startup
 (setq inhibit-startup-message t)
+(setq initial-scratch-message nil)
 
 ;; run commands fast
 (global-set-key (kbd "C-c c") 'counsel-compile)
@@ -29,7 +29,6 @@
 ;; bind to the split-horzn function
 (global-set-key (kbd "C-x 2") 'split-window-and-switch-below)
 
-
 (defun split-window-and-switch-right ()
   (interactive)
   (split-window-right)
@@ -39,3 +38,6 @@
 ;; bind to the split-vert function
 (global-set-key (kbd "C-x 3") 'split-window-and-switch-right)
 
+
+;; remove trailing whitespace on save
+(add-hook 'before-save-hook 'delete-trailing-whitespace)

@@ -29,3 +29,4 @@
   (keyboard-quit))
 
 (electric-indent-mode +1)
+(electric-pair-mode t)
