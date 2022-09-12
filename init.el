@@ -39,6 +39,8 @@
     ;; file (when I have time to play around it on the weekend)
     web-mode
 
+    add-node-modules-path
+
     prettier-js
 
     ;; python related stuff
@@ -89,8 +91,6 @@
 (load "init-clojure.el")
 
 (load "init-web.el")
-
-(load "init-php.el")
 
 (load "init-py.el")
 
