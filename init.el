@@ -65,6 +65,8 @@
     ;; expermintal
     xclip
 
+    vterm
+
     spacemacs-theme))
 
 (dolist (p my-packages)

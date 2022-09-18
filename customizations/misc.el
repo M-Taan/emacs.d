@@ -11,9 +11,6 @@
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
 
-;; run commands fast
-(global-set-key (kbd "C-c c") 'counsel-compile)
-
 ;; everytime any buffer uses grep-mode
 ;; emacs will automatically switch to that buffer
 (add-hook 'grep-mode-hook
@@ -38,6 +35,19 @@
 ;; bind to the split-vert function
 (global-set-key (kbd "C-x 3") 'split-window-and-switch-right)
 
+;; vterm stuff
+(defun vterm-open-below ()
+  "Open vterm below the current buffer"
+  (interactive)
+  (split-window-below)
+  (balance-windows)
+  (other-window 1)
+  (vterm))
+
+;; bind to the vterm-below function
+(global-set-key (kbd "C-c b v") 'vterm-open-below)
+
+(global-set-key (kbd "C-c v") 'vterm)
 
 ;; remove trailing whitespace on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
