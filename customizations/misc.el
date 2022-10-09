@@ -8,9 +8,6 @@
 ;; No need for ~ files when editing
 (setq create-lockfiles nil)
 
-(setq inhibit-startup-message t)
-(setq initial-scratch-message nil)
-
 ;; everytime any buffer uses grep-mode
 ;; emacs will automatically switch to that buffer
 (add-hook 'grep-mode-hook

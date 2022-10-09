@@ -9,7 +9,7 @@
 (global-set-key (kbd "C-x b") 'counsel-switch-buffer)
 
 ;; projectile everywhere!
-(projectile-global-mode)
+(projectile-mode +1)
 
 ;;ivy completion
 (setq projectile-completion-system 'ivy)

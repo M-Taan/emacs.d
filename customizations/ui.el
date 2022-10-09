@@ -1,3 +1,6 @@
+;; linum stuff
+(setq linum-format "%4d \u2502")
+
 ;; Turn off the menu bar at the top of each frame because it's distracting
 (menu-bar-mode 0)
 
@@ -31,3 +34,32 @@
 ;; no bell
 (setq ring-bell-function 'ignore)
 
+;; icons
+(when (display-graphic-p)
+  (require 'all-the-icons))
+
+;; dashboard
+(require 'dashboard)
+
+(dashboard-setup-startup-hook)
+
+(setq initial-buffer-choice
+      (lambda ()
+        (get-buffer-create "*dashboard*")))
+
+(setq dashboard-startup-banner
+      (concat
+       user-emacs-directory
+       "/assets/rick-and-morty.png"))
+
+(setq dashboard-banner-logo-title "Howdy, I guess!")
+
+(setq dashboard-footer-messages '("Programming is about thinking, not typing!"
+                                  "Calling EMACS an editor is like calling the Earth a hunk of dirt."))
+
+(setq dashboard-items '((recents  . 5)
+                        (projects . 5)))
+
+(setq dashboard-set-heading-icons t)
+
+(setq dashboard-set-file-icons t)

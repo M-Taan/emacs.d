@@ -27,3 +27,27 @@
 
 (electric-indent-mode +1)
 (electric-pair-mode t)
+
+;; company
+(global-company-mode)
+;; this needs to run after company mode is enabled
+(company-prescient-mode 1)
+(global-set-key (kbd "C-p") #'company-indent-or-complete-common)
+(global-set-key (kbd "TAB") #'indent-for-tab-command)
+
+;; comment/uncoment regions
+(global-set-key (kbd "C-c =") 'comment-region)
+(global-set-key (kbd "C-c -") 'uncomment-region)
+
+(delete-selection-mode 1)
+
+;; enable xclip mode by default
+;; download xclip on your machine too
+(xclip-mode 1)
+
+;; projectile
+(require 'projectile)
+
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+(projectile-mode +1)
