@@ -1,11 +1,10 @@
 ;; linum stuff
 (setq linum-format "%4d \u2502")
 
+(global-set-key (kbd "C-c l") 'linum-mode)
+
 ;; Turn off the menu bar at the top of each frame because it's distracting
 (menu-bar-mode 0)
-
-;; linum
-(global-linum-mode)
 
 ;; no toolbar
 (when (fboundp 'tool-bar-mode)
@@ -15,7 +14,6 @@
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 
-
 ;; uncomment to specify emacs's initial position and H/W on the screen
 ;; (setq initial-frame-alist '((top . 0) (left . 0) (width . 177) (height . 53)))
 
@@ -23,7 +21,6 @@
 (blink-cursor-mode 0)
 
 (setq-default cursor-type 'bar)
-
 
 ;; full path in title bar
 (setq-default frame-title-format "%b (%f)")
@@ -33,6 +30,10 @@
 
 ;; no bell
 (setq ring-bell-function 'ignore)
+
+(load-theme 'doom-xcode t)
+
+(doom-modeline-mode 1)
 
 ;; icons
 (when (display-graphic-p)

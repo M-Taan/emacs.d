@@ -58,3 +58,7 @@ ido.last
 
 # prescient
 var/
+
+projectile.cache
+request/
+.cache/
