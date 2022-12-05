@@ -31,7 +31,7 @@
 ;; no bell
 (setq ring-bell-function 'ignore)
 
-(load-theme 'doom-xcode t)
+(load-theme 'doom-dark+ t)
 
 (doom-modeline-mode 1)
 
