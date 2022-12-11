@@ -4,4 +4,6 @@
 ;; enable spotify connect
 (setq smudge-transport 'connect)
 
+(global-set-key (kbd "C-c .") 'smudge-command-map)
+
 (global-set-key (kbd "C-c s") 'global-smudge-remote-mode)
