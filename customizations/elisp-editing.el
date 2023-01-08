@@ -1,12 +1,14 @@
 ;; elisp editing
 
 (use-package eldoc
+  :ensure t
   :hook
   (emacs-lisp-mode . turn-on-eldoc-mode)
   (lisp-interaction-mode . turn-on-eldoc-mode)
   (ielm-mode . turn-on-eldoc-mode))
 
 (use-package paredit
+  :ensure t
   :init
   (add-hook 'clojure-mode-hook #'enable-paredit-mode)
   (add-hook 'cider-repl-mode-hook #'enable-paredit-mode)

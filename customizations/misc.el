@@ -33,6 +33,7 @@
 (global-set-key (kbd "C-x 3") 'split-window-and-switch-right)
 
 (use-package vterm
+  :ensure t
   :bind
   ("C-c b v" . vterm-open-below)
   ("C-c v" . vterm))
@@ -48,4 +49,5 @@
 ;; remove trailing whitespace on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(use-package magit)
+(use-package magit
+  :ensure t)

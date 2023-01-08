@@ -6,11 +6,14 @@
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-css-indent-offset 2))
 
-(use-package tagedit)
+(use-package tagedit
+  :ensure t)
 
-(use-package add-node-modules-path)
+(use-package add-node-modules-path
+  :ensure t)
 
-(use-package prettier-js)
+(use-package prettier-js
+  :ensure t)
 
 (defun prettier-js-web-mode-hook ()
   (when (s-starts-with?
@@ -21,6 +24,7 @@
     (prettier-js-mode)))
 
 (use-package web-mode
+  :ensure t
   :hook
   (web-mode . web-mode-init-hook)
   (web-mode . prettier-js-web-mode-hook)

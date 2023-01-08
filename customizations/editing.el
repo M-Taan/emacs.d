@@ -23,10 +23,12 @@
 (electric-pair-mode t)
 
 (use-package company
+  :ensure t
   :init (global-company-mode)
   :bind ("C-p" . company-indent-or-complete-common))
 
 (use-package company-prescient
+  :ensure t
   :after company
   :init (company-prescient-mode 1))
 
@@ -39,13 +41,16 @@
 (delete-selection-mode 1)
 
 (use-package xclip
+  :ensure t
   :init (xclip-mode 1))
 
 (use-package swiper
+  :ensure t
   :bind
   ("C-s" . swiper-isearch)
   ("C-M-a" . swiper-all))
 
 (use-package prescient
+  :ensure t
   :init
   (prescient-persist-mode 1))

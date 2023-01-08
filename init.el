@@ -51,7 +51,7 @@
  '(doom-modeline-time t)
  '(doom-modeline-time-icon t)
  '(package-selected-packages
-   '(use-package lua-mode doom-modeline doom-themes smudge all all-the-icons counsel-projectile page-break-lines dashboard-ls dashboard monkeytype monky focus cypher-mode xclip yaml-mode company-prescient ivy-prescient counsel magit tagedit elpy prettier-js web-mode projectile flycheck-clj-kondo clojure-mode-extra-font-locking clojure-mode flycheck paredit)))
+   '(tree-sitter-langs tree-sitter use-package lua-mode doom-modeline doom-themes smudge all all-the-icons page-break-lines dashboard-ls dashboard monkeytype monky focus cypher-mode xclip yaml-mode company-prescient ivy-prescient counsel magit tagedit elpy prettier-js web-mode projectile flycheck-clj-kondo clojure-mode-extra-font-locking clojure-mode flycheck paredit)))
 
  ;; custom faces
 (custom-set-faces

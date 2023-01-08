@@ -1,6 +1,7 @@
 ;; Clojure <3
 
 (use-package clojure-mode
+  :ensure t
   :after paredit
   :mode (("\\.edn$" . clojure-mode)
          ("\\.boot$" . clojure-mode)
@@ -13,6 +14,7 @@
   (clojure-mode . enable-paredit-mode))
 
 (use-package cider
+  :ensure t
   :after (clojure-mode paredit eldoc)
   :hook
   (cider-mode . eldoc-mode)

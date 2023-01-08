@@ -1,8 +1,10 @@
 ;; smudge for spotify
 
-(use-package simple-httpd)
+(use-package simple-httpd
+  :ensure t)
 
 (use-package smudge
+  :ensure t
   :after simple-httpd
   :init
   (setq smudge-oauth2-client-secret (getenv "SPOTIFY_SECRET"))

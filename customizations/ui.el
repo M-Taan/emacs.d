@@ -22,8 +22,6 @@
 
 (display-battery-mode 1)
 
-(display-time-mode 1)
-
 (setq-default cursor-type 'bar)
 
 ;; full path in title bar
@@ -37,6 +35,7 @@
 
 ;; doom themes
 (use-package doom-themes
+  :ensure t
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
@@ -44,21 +43,23 @@
 
 ;; icons
 (use-package all-the-icons
+  :ensure t
   :if (display-graphic-p))
 
 ;; doom modeline
 (use-package doom-modeline
+  :ensure t
   :init
   (doom-modeline-mode 1)
   :config
-  (setq doom-modeline-time t
-        doom-modeline-battery t
+  (setq doom-modeline-battery t
         doom-modeline-icon t
         doom-modeline-major-mode-icon t
         doom-modeline-major-mode-color-icon t))
 
 ;; dashboard
 (use-package dashboard
+  :ensure t
   :init
   (dashboard-setup-startup-hook)
   :config
