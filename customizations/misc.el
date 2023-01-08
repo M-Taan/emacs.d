@@ -32,7 +32,11 @@
 ;; bind to the split-vert function
 (global-set-key (kbd "C-x 3") 'split-window-and-switch-right)
 
-;; vterm stuff
+(use-package vterm
+  :bind
+  ("C-c b v" . vterm-open-below)
+  ("C-c v" . vterm))
+
 (defun vterm-open-below ()
   "Open vterm below the current buffer"
   (interactive)
@@ -41,10 +45,7 @@
   (other-window 1)
   (vterm))
 
-;; bind to the vterm-below function
-(global-set-key (kbd "C-c b v") 'vterm-open-below)
-
-(global-set-key (kbd "C-c v") 'vterm)
-
 ;; remove trailing whitespace on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(use-package magit)

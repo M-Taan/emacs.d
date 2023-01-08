@@ -1,13 +1,7 @@
 ;; Customizations relating to editing a buffer.
 
-;; Highlights matching parenthesis
-(show-paren-mode 1)
-
 ;; Highlight current line
 (global-hl-line-mode 1)
-
-(global-set-key (kbd "C-s") 'swiper-isearch)
-(global-set-key (kbd "C-M-a") 'swiper-all)
 
 ;; Don't use hard tabs
 (setq-default indent-tabs-mode nil)
@@ -28,11 +22,14 @@
 (electric-indent-mode +1)
 (electric-pair-mode t)
 
-;; company
-(global-company-mode)
-;; this needs to run after company mode is enabled
-(company-prescient-mode 1)
-(global-set-key (kbd "C-p") #'company-indent-or-complete-common)
+(use-package company
+  :init (global-company-mode)
+  :bind ("C-p" . company-indent-or-complete-common))
+
+(use-package company-prescient
+  :after company
+  :init (company-prescient-mode 1))
+
 (global-set-key (kbd "TAB") #'indent-for-tab-command)
 
 ;; comment/uncoment regions
@@ -41,13 +38,14 @@
 
 (delete-selection-mode 1)
 
-;; enable xclip mode by default
-;; download xclip on your machine too
-(xclip-mode 1)
+(use-package xclip
+  :init (xclip-mode 1))
 
-;; projectile
-(require 'projectile)
+(use-package swiper
+  :bind
+  ("C-s" . swiper-isearch)
+  ("C-M-a" . swiper-all))
 
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-
-(projectile-mode +1)
+(use-package prescient
+  :init
+  (prescient-persist-mode 1))

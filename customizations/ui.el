@@ -6,11 +6,11 @@
 ;; Turn off the menu bar at the top of each frame because it's distracting
 (menu-bar-mode 0)
 
-;; no toolbar
+;; hide toolbar
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
 
-;; Don't show native OS scroll bars for buffers because they're redundant
+;; hide scroll bar
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 
@@ -31,36 +31,40 @@
 ;; no bell
 (setq ring-bell-function 'ignore)
 
-(load-theme 'doom-dark+ t)
+;; doom themes
+(use-package doom-themes
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (load-theme 'doom-dark+ t))
 
-(doom-modeline-mode 1)
+;; doom modeline
+(use-package doom-modeline
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-time t)
+  (setq doom-modeline-battery t))
 
 ;; icons
-(when (display-graphic-p)
-  (require 'all-the-icons))
+(use-package all-the-icons
+  :if (display-graphic-p))
 
 ;; dashboard
-(require 'dashboard)
-
-(dashboard-setup-startup-hook)
-
-(setq initial-buffer-choice
-      (lambda ()
-        (get-buffer-create "*dashboard*")))
-
-(setq dashboard-startup-banner
-      (concat
-       user-emacs-directory
-       "/assets/rick-and-morty.png"))
-
-(setq dashboard-banner-logo-title "Howdy, I guess!")
-
-(setq dashboard-footer-messages '("Programming is about thinking, not typing!"
-                                  "Calling EMACS an editor is like calling the Earth a hunk of dirt."))
-
-(setq dashboard-items '((recents  . 5)
-                        (projects . 5)))
-
-(setq dashboard-set-heading-icons t)
-
-(setq dashboard-set-file-icons t)
+(use-package dashboard
+  :init
+  (dashboard-setup-startup-hook)
+  :config
+  (setq initial-buffer-choice
+        (lambda ()
+          (get-buffer-create "*dashboard*"))
+        dashboard-startup-banner
+        (concat
+         user-emacs-directory
+         "/assets/rick-and-morty.png")
+        dashboard-banner-logo-title "Howdy, I guess!"
+        dashboard-footer-messages '("Programming is about thinking, not typing!"
+                                    "Calling EMACS an editor is like calling the Earth a hunk of dirt.")
+        dashboard-items '((recents  . 5)
+                          (projects . 5))
+        dashboard-set-heading-icons t
+        dashboard-set-file-icons t))
