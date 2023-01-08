@@ -20,6 +20,10 @@
 ;; No cursor blinking, it sucks
 (blink-cursor-mode 0)
 
+(display-battery-mode 1)
+
+(display-time-mode 1)
+
 (setq-default cursor-type 'bar)
 
 ;; full path in title bar
@@ -38,16 +42,20 @@
         doom-themes-enable-italic t)
   (load-theme 'doom-dark+ t))
 
-;; doom modeline
-(use-package doom-modeline
-  :init (doom-modeline-mode 1)
-  :config
-  (setq doom-modeline-time t)
-  (setq doom-modeline-battery t))
-
 ;; icons
 (use-package all-the-icons
   :if (display-graphic-p))
+
+;; doom modeline
+(use-package doom-modeline
+  :init
+  (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-time t
+        doom-modeline-battery t
+        doom-modeline-icon t
+        doom-modeline-major-mode-icon t
+        doom-modeline-major-mode-color-icon t))
 
 ;; dashboard
 (use-package dashboard
