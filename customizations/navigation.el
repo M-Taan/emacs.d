@@ -26,3 +26,7 @@
   :after counsel
   :init
   (counsel-projectile-mode 1))
+
+(global-set-key (kbd "C-c <right>") 'forward-sexp)
+(global-set-key (kbd "C-c <left>") 'backward-sexp)
+(global-set-key (kbd "C-c C-SPC") 'mark-sexp)

@@ -11,7 +11,9 @@
          ("\\.boot\\'" . clojure-mode))
   :hook
   (clojure-mode . subword-mode)
-  (clojure-mode . enable-paredit-mode))
+  (clojure-mode . enable-paredit-mode)
+  :custom
+  (cider-repl-display-help-banner nil))
 
 (use-package cider
   :ensure t
