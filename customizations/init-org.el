@@ -24,6 +24,8 @@
   (setq org-log-done t)
   (setq org-log-into-drawer t)
 
+  (setq org-ellipsis " ▼")
+
   (setq org-capture-templates
         (doct '(("Work" :keys "w" :file "~/org/work.org" :children
                  (("TODO" :keys "t" :empty-lines 1 :headline "Tasks" :template ("* TODO %^{Description} :project:%^g"
@@ -95,5 +97,5 @@
   :init
   (setq org-gcal-client-id (getenv "EMACS_GOOGLE_CALENDER_CLIENT_ID")
         org-gcal-client-secret (getenv "EMACS_GOOGLE_CALENDER_SECRET_ID")
-        org-gcal-fetch-file-alist '(((getenv "EMACS_GOOGLE_CALENDAR_EMAIL_1") .  "~/org/calendar.org")))
+        org-gcal-fetch-file-alist '(("mtaan@rams.services" .  "~/org/calendar.org")))
   (setq plstore-cache-passphrase-for-symmetric-encryption t))

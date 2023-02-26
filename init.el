@@ -48,15 +48,20 @@
 
 (load "init-org.el")
 
+(load "request.el")
+
+(load "init-lsp.el")
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(cypher-indent-offset 10)
  '(doom-modeline-time t)
  '(doom-modeline-time-icon t)
  '(package-selected-packages
-   '(org-faces doct org-gcal org-bullets org-agenda tree-sitter-langs tree-sitter use-package lua-mode doom-modeline doom-themes smudge all all-the-icons page-break-lines dashboard-ls dashboard monkeytype monky focus cypher-mode xclip yaml-mode company-prescient ivy-prescient counsel magit tagedit elpy prettier-js web-mode projectile flycheck-clj-kondo clojure-mode-extra-font-locking clojure-mode flycheck paredit)))
+   '(lsp-ui lsp-ivy lsp-treemacs lsp-mode org-faces doct org-gcal org-bullets org-agenda tree-sitter-langs tree-sitter use-package lua-mode doom-modeline doom-themes smudge all all-the-icons page-break-lines dashboard-ls dashboard monkeytype monky focus xclip yaml-mode company-prescient ivy-prescient counsel magit tagedit elpy prettier-js web-mode projectile flycheck-clj-kondo clojure-mode-extra-font-locking clojure-mode flycheck paredit)))
 
  ;; custom faces
 (custom-set-faces
@@ -69,3 +74,6 @@
 ;; font of choice
 (add-to-list 'default-frame-alist
              '(font . "DejaVu Sans Mono-12"))
+
+(set-frame-parameter (selected-frame) 'alpha '(95 . 90))
+(add-to-list 'default-frame-alist '(alpha . (95 . 90)))

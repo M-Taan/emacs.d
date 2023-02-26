@@ -64,3 +64,8 @@ request/
 .cache/
 url/
 .org-generic-id-locations
+.lsp-*
+bookmarks
+*.plist
+persist/**
+projects
