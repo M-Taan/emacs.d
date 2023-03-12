@@ -12,4 +12,4 @@
   (setq smudge-transport 'connect)
   :bind
   ("C-c ." . smudge-command-map)
-  ("C-c s" . global-smudge-remote-mode))
+  ("C-c g s" . global-smudge-remote-mode))

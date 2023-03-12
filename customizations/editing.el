@@ -45,12 +45,11 @@
   :init (xclip-mode 1))
 
 (use-package swiper
-  :ensure t
-  :bind
-  ("C-s" . swiper-isearch)
-  ("C-M-a" . swiper-all))
+  :ensure t)
 
 (use-package prescient
   :ensure t
   :init
   (prescient-persist-mode 1))
+
+(yas-global-mode 1)

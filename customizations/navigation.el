@@ -27,5 +27,11 @@
   :init
   (counsel-projectile-mode 1))
 
+(use-package ace-jump-mode
+  :ensure t
+  :bind
+  ("<insert>" . ace-jump-mode)
+  ("C-<insert>" . ace-jump-mode-pop-mark))
+
 (global-set-key (kbd "C-c <right>") 'forward-sexp)
 (global-set-key (kbd "C-c <left>") 'backward-sexp)

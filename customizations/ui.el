@@ -39,7 +39,7 @@
   :config
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  (load-theme 'doom-dark+ t))
+  (load-theme 'doom-city-lights t))
 
 ;; icons
 (use-package all-the-icons
