@@ -11,6 +11,7 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+
 (eval-and-compile
   (setq use-package-always-ensure t
         use-package-expand-minimally t))
@@ -65,7 +66,7 @@
  '(doom-modeline-time t)
  '(doom-modeline-time-icon t)
  '(package-selected-packages
-   '(ace-jump-mode typescript-mode rust-mode lsp-ui lsp-ivy lsp-treemacs lsp-mode org-faces doct org-gcal org-bullets org-agenda tree-sitter-langs tree-sitter use-package lua-mode doom-modeline doom-themes smudge all all-the-icons page-break-lines dashboard-ls dashboard monkeytype monky focus xclip yaml-mode company-prescient ivy-prescient counsel magit tagedit elpy prettier-js web-mode projectile flycheck-clj-kondo clojure-mode-extra-font-locking clojure-mode flycheck paredit)))
+   '(drag-stuff ace-jump-mode typescript-mode rust-mode lsp-ui lsp-ivy lsp-treemacs lsp-mode org-faces doct org-gcal org-bullets org-agenda tree-sitter-langs tree-sitter use-package lua-mode doom-modeline doom-themes smudge all all-the-icons page-break-lines dashboard-ls dashboard monkeytype monky focus xclip yaml-mode company-prescient ivy-prescient counsel magit tagedit elpy prettier-js web-mode projectile flycheck-clj-kondo clojure-mode-extra-font-locking clojure-mode flycheck paredit)))
 
  ;; custom faces
 (custom-set-faces
@@ -73,6 +74,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(doom-modeline-battery-charging ((t (:inherit success :weight normal))))
  '(swiper-match-face-1 ((t (:inherit bold :background "lawn green" :foreground "black")))))
 
 ;; font of choice

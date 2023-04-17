@@ -30,6 +30,7 @@
   (web-mode . prettier-js-web-mode-hook)
   :mode ("\\.jsx?$"
          "\\.html?\\'"
+         "\\.css?\\'"
          "\\.phtml\\'"
          "\\.tpl\\'"
          "\\.php\\'"

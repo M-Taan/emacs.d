@@ -21,12 +21,6 @@
   :bind ("C-c p" . projectile-command-map)
   :init (projectile-mode +1))
 
-(use-package counsel-projectile
-  :ensure t
-  :after counsel
-  :init
-  (counsel-projectile-mode 1))
-
 (use-package ace-jump-mode
   :ensure t
   :bind
