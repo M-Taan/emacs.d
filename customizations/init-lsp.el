@@ -1,10 +1,11 @@
 (use-package lsp-mode
   :ensure t
-  :commands lsp
+  :commands lsp lsp-deferred
   :hook
-  (clojure-mode . lsp)
-  (clojurescript-mode . lsp)
-  (clojurec-mode . lsp)
+  (clojure-mode . lsp-deferred)
+  (clojurescript-mode . lsp-deferred)
+  (clojurec-mode . lsp-deferred)
+  (web-mode . lsp-deferred)
   :config
   (setq gc-cons-threshold (* 100 1024 1024)
         read-process-output-max (* 1024 1024))
@@ -16,10 +17,11 @@
         lsp-modeline-code-actions-enable nil
         lsp-modeline-diagnostics-enable nil
         lsp-modeline-diagnostics-mode nil
-        lsp-completion-mode nil))
+        lsp-completion-mode nil
+        lsp-references-exclude-definition '("node_modules/@types/react/index.d.ts")))
 
 (use-package lsp-treemacs
-  :after lsp
+  :after lsp-mode
   :ensure t)
 
 (use-package lsp-ivy

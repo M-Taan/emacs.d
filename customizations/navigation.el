@@ -19,7 +19,10 @@
 (use-package projectile
   :ensure t
   :bind ("C-c p" . projectile-command-map)
-  :init (projectile-mode +1))
+  :init (projectile-mode +1)
+  :config
+  (add-to-list 'projectile-globally-ignored-files "node-modules")
+  (add-to-list 'projectile-globally-ignored-files "~/")) 
 
 (use-package ace-jump-mode
   :ensure t
