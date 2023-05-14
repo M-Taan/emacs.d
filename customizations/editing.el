@@ -52,4 +52,7 @@
   :init
   (prescient-persist-mode 1))
 
-(yas-global-mode 1)
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode 1))

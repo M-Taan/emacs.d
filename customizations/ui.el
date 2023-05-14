@@ -53,9 +53,9 @@
   (doom-modeline-mode 1)
   :config
   (setq doom-modeline-battery t
-        doom-modeline-icon t
-        doom-modeline-major-mode-icon t
-        doom-modeline-major-mode-color-icon t))
+       doom-modeline-icon t
+       doom-modeline-major-mode-icon t
+       doom-modeline-major-mode-color-icon t))
 
 ;; dashboard
 (use-package dashboard
