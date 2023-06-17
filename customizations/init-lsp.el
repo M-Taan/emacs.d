@@ -17,8 +17,7 @@
         lsp-modeline-code-actions-enable nil
         lsp-modeline-diagnostics-enable nil
         lsp-modeline-diagnostics-mode nil
-        lsp-completion-mode nil
-        lsp-references-exclude-definition '("node_modules/@types/react/index.d.ts")))
+        lsp-completion-mode nil))
 
 (use-package lsp-treemacs
   :after lsp-mode

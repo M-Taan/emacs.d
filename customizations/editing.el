@@ -44,9 +44,6 @@
   :ensure t
   :init (xclip-mode 1))
 
-(use-package swiper
-  :ensure t)
-
 (use-package prescient
   :ensure t
   :init
