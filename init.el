@@ -1,5 +1,9 @@
 (require 'package)
 
+(setq gc-cons-threshold 100000000)
+
+(setq read-process-output-max (* 1024 1024))
+
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 
@@ -7,14 +11,6 @@
              '("org" . "https://orgmode.org/elpa/"))
 
 (package-initialize)
-
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-(eval-and-compile
-  (setq use-package-always-ensure t
-        use-package-expand-minimally t))
 
 ;;;;
 ;; Customization
@@ -35,6 +31,8 @@
 
 (load "init-clojure.el")
 
+(load "init-treesit.el")
+
 (load "init-web.el")
 
 (load "init-py.el")
@@ -52,6 +50,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes '(doom-city-lights))
+ '(custom-safe-themes
+   '("2e05569868dc11a52b08926b4c1a27da77580daa9321773d92822f7a639956ce" "81fb9ae452bae0521c1faeee58c42e9f08f9bcec3fa8519a85bfda9f3fbb626d" default))
+ '(package-selected-packages
+   '(treesit typescript-ts-base-mode tsx-ts-mode yaml-mode xclip web-mode vterm use-package tagedit smudge projectile prettier-js paredit org-gcal org-bullets magit lua-mode lsp-ui lsp-treemacs lsp-ivy ivy-prescient guru-mode flycheck elpy doom-themes doom-modeline doct dashboard counsel company-prescient cider all-the-icons add-node-modules-path ace-jump-mode))
  '(warning-suppress-log-types '((lsp-mode))))
 
  ;; custom faces

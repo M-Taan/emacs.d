@@ -24,9 +24,13 @@
 ;; no bell
 (setq ring-bell-function 'ignore)
 
-(use-package haki-theme
+;; doom themes
+(use-package doom-themes
+  :ensure t
   :config
-  (setq haki-region "#2e8b6d"))
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (load-theme 'doom-city-lights t))
 
 ;; icons
 (use-package nerd-icons

@@ -11,8 +11,8 @@
 ;; everytime any buffer uses grep-mode
 ;; emacs will automatically switch to that buffer
 (add-hook 'grep-mode-hook
-          '(lambda ()
-             (switch-to-buffer-other-window "*grep*")))
+          #'(lambda ()
+              (switch-to-buffer-other-window "*grep*")))
 
 (defun split-window-and-switch-below ()
   (interactive)

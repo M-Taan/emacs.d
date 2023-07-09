@@ -5,11 +5,9 @@
   (clojure-mode . lsp-deferred)
   (clojurescript-mode . lsp-deferred)
   (clojurec-mode . lsp-deferred)
-  (web-mode . lsp-deferred)
+  (typescript-ts-mode . lsp-deferred)
+  (tsx-ts-mode . lsp-deferred)
   :config
-  (setq gc-cons-threshold (* 100 1024 1024)
-        read-process-output-max (* 1024 1024))
-
   (define-key lsp-mode-map (kbd "C-c w") lsp-command-map)
 
   (setq lsp-headerline-breadcrumb-enable nil
