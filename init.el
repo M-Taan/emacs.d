@@ -43,8 +43,6 @@
 
 (load "init-lua.el")
 
-(load "init-cypher.el")
-
 (load "init-org.el")
 
 (load "init-lsp.el")

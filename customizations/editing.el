@@ -24,8 +24,7 @@
 
 (use-package company
   :ensure t
-  :init (global-company-mode)
-  :bind ("C-p" . company-indent-or-complete-common))
+  :init (global-company-mode))
 
 (use-package company-prescient
   :ensure t

@@ -48,3 +48,8 @@
 
 (use-package magit
   :ensure t)
+
+;; (use-package guru-mode
+;;   :ensure t
+;;   :config
+;;   (guru-global-mode 1))
