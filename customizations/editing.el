@@ -1,6 +1,3 @@
-;; Customizations relating to editing a buffer.
-
-;; Highlight current line
 (global-hl-line-mode 1)
 
 ;; Don't use hard tabs
@@ -11,15 +8,8 @@
                                                "backups"))))
 (setq auto-save-default nil)
 
-;;use 2 spaces for tabs
-(defun die-tabs ()
-  (interactive)
-  (set-variable 'tab-width 2)
-  (mark-whole-buffer)
-  (untabify (region-beginning) (region-end))
-  (keyboard-quit))
-
 (electric-indent-mode +1)
+
 (electric-pair-mode t)
 
 (use-package company

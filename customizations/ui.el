@@ -1,7 +1,4 @@
-;; linum stuff
-(setq linum-format "%4d \u2502")
-
-(global-set-key (kbd "C-c l") 'linum-mode)
+(global-set-key (kbd "C-c l") 'global-display-line-numbers-mode)
 
 (menu-bar-mode 0)
 
