@@ -27,24 +27,17 @@
 ;; bind to the split-vert function
 (global-set-key (kbd "C-x 3") 'split-window-and-switch-right)
 
-(use-package vterm
-  :ensure t
-  :bind
-  ("C-c b v" . vterm-open-below)
-  ("C-c v" . vterm))
-
-(defun vterm-open-below ()
-  "Open vterm below the current buffer"
-  (interactive)
-  (split-window-below)
-  (balance-windows)
-  (other-window 1)
-  (vterm))
-
 (use-package magit
   :ensure t)
 
-;; (use-package guru-mode
-;;   :ensure t
-;;   :config
-;;   (guru-global-mode 1))
+(defun open-tmux-session-current-directory ()
+  (interactive)
+  (start-process "tmux" nil "kitty" "tmux" "new-session" "-s" (projectile-project-name)))
+
+(defun open-tmux-session-current-project-root ()
+  (interactive)
+  (start-process "tmux" nil "kitty" "tmux" "new-session" "-s" (projectile-project-name) "-c" (projectile-project-root)))
+
+(global-set-key (kbd "C-c b v") 'open-tmux-session-current-directory)
+
+(global-set-key (kbd "C-c b b") 'open-tmux-session-current-project-root)
