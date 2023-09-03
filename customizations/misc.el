@@ -30,13 +30,24 @@
 (use-package magit
   :ensure t)
 
+(defun tmux-session-exists? (session)
+  (not (string-empty-p (shell-command-to-string (concat "tmux list-sessions | grep " session)))))
+
 (defun open-tmux-session-current-directory ()
   (interactive)
-  (start-process "tmux" nil "alacritty" "tmux" "new-session" "-s" (projectile-project-name)))
+  (let* ((name (replace-regexp-in-string "\\." "" (projectile-project-name)))
+         (attach-session? (tmux-session-exists? name)))
+    (if attach-session?
+        (start-process-shell-command "tmux" nil (concat "alacritty -e tmux attach -t " name))
+      (start-process-shell-command "tmux" nil (concat "alacritty -e tmux new-session -s " name)))))
 
 (defun open-tmux-session-current-project-root ()
   (interactive)
-  (start-process "tmux" nil "alacritty" "tmux" "new-session" "-s" (projectile-project-name) "-c" (projectile-project-root)))
+  (let* ((name (replace-regexp-in-string "\\." "" (projectile-project-name)))
+         (attach-session? (tmux-session-exists? name)))
+    (if attach-session?
+        (start-process-shell-command "tmux" nil (concat "alacritty -e tmux attach -t " name))
+      (start-process-shell-command "tmux" nil (concat "alacritty -e tmux new-session -s " name " -c " (projectile-project-root))))))
 
 (global-set-key (kbd "C-c b v") 'open-tmux-session-current-directory)
 
