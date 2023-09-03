@@ -69,3 +69,4 @@ bookmarks
 *.plist
 persist/**
 projects
+eln-cache

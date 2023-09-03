@@ -32,11 +32,11 @@
 
 (defun open-tmux-session-current-directory ()
   (interactive)
-  (start-process "tmux" nil "kitty" "tmux" "new-session" "-s" (projectile-project-name)))
+  (start-process "tmux" nil "alacritty" "tmux" "new-session" "-s" (projectile-project-name)))
 
 (defun open-tmux-session-current-project-root ()
   (interactive)
-  (start-process "tmux" nil "kitty" "tmux" "new-session" "-s" (projectile-project-name) "-c" (projectile-project-root)))
+  (start-process "tmux" nil "alacritty" "tmux" "new-session" "-s" (projectile-project-name) "-c" (projectile-project-root)))
 
 (global-set-key (kbd "C-c b v") 'open-tmux-session-current-directory)
 

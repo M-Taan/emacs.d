@@ -66,6 +66,3 @@
 ;; font of choice
 (add-to-list 'default-frame-alist
              '(font . "DejaVu Sans Mono-12"))
-
-(set-frame-parameter (selected-frame) 'alpha '(100 . 95))
-(add-to-list 'default-frame-alist '(alpha . (100 . 95)))

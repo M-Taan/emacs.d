@@ -30,8 +30,9 @@
   :config
   (set-face-attribute 'lsp-ui-sideline-global nil
                       :background "black")
-  (define-key lsp-mode-map (kbd "C-c w s d") #'lsp-ui-doc-toggle)
   (setq lsp-ui-doc-enable nil)
+  (define-key lsp-mode-map (kbd "C-c w s d") #'lsp-ui-doc-toggle)
+  (define-key lsp-mode-map (kbd "C-c w s f") #'lsp-ui-doc-focus-frame)
   :custom
   (lsp-ui-sideline-show-diagnostics t)
   (lsp-ui-doc-position 'top))

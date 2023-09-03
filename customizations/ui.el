@@ -53,12 +53,11 @@
   (setq initial-buffer-choice
         #'(lambda ()
             (get-buffer-create "*dashboard*"))
-        dashboard-startup-banner
-        (concat
-         user-emacs-directory
-         "/assets/rick-and-morty.png")
-        dashboard-banner-logo-title "Howdy, I guess!"
-        dashboard-footer-messages '("Programming is about thinking, not typing!"
-                                    "Calling EMACS an editor is like calling the Earth a hunk of dirt.")
+        dashboard-startup-banner (concat user-emacs-directory "assets/akatsuki.txt")
+        dashboard-banner-logo-title "Howdy!"
         dashboard-items '((recents  . 5)
                           (projects . 5))))
+
+;; transparency
+(set-frame-parameter nil 'alpha-background 80)
+(add-to-list 'default-frame-alist '(alpha-background . 70))
