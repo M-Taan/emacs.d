@@ -66,3 +66,8 @@
 ;; font of choice
 (add-to-list 'default-frame-alist
              '(font . "DejaVu Sans Mono-12"))
+
+;; transparency
+(set-frame-parameter nil 'alpha-background 90)
+
+(add-to-list 'default-frame-alist '(alpha-background . 90))

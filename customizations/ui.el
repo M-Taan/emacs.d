@@ -57,7 +57,3 @@
         dashboard-banner-logo-title "Howdy!"
         dashboard-items '((recents  . 5)
                           (projects . 5))))
-
-;; transparency
-(set-frame-parameter nil 'alpha-background 80)
-(add-to-list 'default-frame-alist '(alpha-background . 70))

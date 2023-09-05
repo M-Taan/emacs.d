@@ -31,7 +31,7 @@
   :ensure t)
 
 (defun tmux-session-exists? (session)
-  (not (string-empty-p (shell-command-to-string (concat "tmux list-sessions | grep " session)))))
+  (not (string-empty-p (shell-command-to-string (concat "tmux list-sessions 2>&1 | grep " session)))))
 
 (defun open-tmux-session-current-directory ()
   (interactive)
