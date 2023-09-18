@@ -29,3 +29,4 @@
         cider-auto-select-error-buffer t
         cider-repl-history-file "~/.emacs.d/cider-history"
         cider-repl-wrap-history t))
+

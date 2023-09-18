@@ -17,10 +17,6 @@
         lsp-modeline-diagnostics-mode nil
         lsp-completion-mode nil))
 
-(use-package lsp-treemacs
-  :after lsp-mode
-  :ensure t)
-
 (use-package lsp-ivy
   :ensure t)
 
