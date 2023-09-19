@@ -1,5 +1,3 @@
-(defconst available-targets '("work" "personal"))
-
 (defun org-mode-init-hook ()
   (org-indent-mode)
   (visual-line-mode 1))
@@ -96,57 +94,3 @@
         org-gcal-client-secret (getenv "EMACS_GOOGLE_CALENDER_SECRET_ID")
         org-gcal-fetch-file-alist '(("mtaan@rams.services" .  "~/org/calendar.org")))
   (setq plstore-cache-passphrase-for-symmetric-encryption t))
-
-;; An attempt at creating a seamless flow ;)
-
-(defun mtaan/current-day-heading ()
-  (apply 'format "Date: %s/%s/%s" (calendar-current-date)))
-
-(defun mtaan/org-add-new-day (target)
-  (interactive (list (completing-read "Available targets: " available-targets)))
-  (when (or (string-empty-p target)
-            (not (member target available-targets)))
-    (error "Target is not valid"))
-  (find-file (concat "~/org/" target ".org"))
-  (let* ((heading (mtaan/current-day-heading))
-         (heading-exists? (org-find-exact-headline-in-buffer heading)))
-    (if heading-exists?
-        (message "Current day is already logged")
-      (progn
-        (goto-char (point-min))
-        (org-insert-heading-respect-content)
-        (insert heading)))))
-
-(defun mtaan/org-add-new-project (proj)
-  "By default this will use the work file, maybe later it could be generalized.
-   It will also assume that I'm adding a proj under the same day"
-  (interactive "sProject Name: ")
-  (when (string-empty-p proj)
-    (error "Project name shouldn't be empty"))
-  (find-file "~/org/work.org")
-  (let* ((proj-subheading (concat "PROJ " (capitalize proj)))
-         (day-heading (mtaan/current-day-heading))
-         (heading (org-find-exact-headline-in-buffer day-heading nil 't)))
-    (unless heading
-      (error "Current day is not logged"))
-    (goto-char heading)
-    (end-of-line)
-    (org-insert-subheading nil)
-    (insert proj-subheading)
-    (org-set-property "ID" (concat day-heading " - " proj-subheading))))
-
-(defun mtaan/org-add-new-todo-under-proj (proj)
-  (interactive "sTODO Project Name: ")
-  (when (string-empty-p proj)
-    (error "Project name shouldn't be empty"))
-  (find-file "~/org/work.org")
-  (let* ((proj-subheading (concat "PROJ " (capitalize proj)))
-         (day-heading (mtaan/current-day-heading))
-         (heading (org-find-exact-headline-in-buffer day-heading nil 't)))
-    (unless heading
-      (error "Current day is not logged"))
-    (org-id-goto (concat day-heading " - " proj-subheading))
-    (end-of-line)
-    (org-insert-heading-respect-content)
-    (org-demote)
-    (insert "TODO ")))
