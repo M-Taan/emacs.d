@@ -75,7 +75,7 @@
   (interactive (list (completing-read "Available targets: " available-targets)))
   (mtaan/org-add-new-day target (mtaan/current-day-heading)))
 
-(defun mtaan/org-add-new-project-today (target)
+(defun mtaan/org-add-new-project-today (proj)
   (interactive "sProject Name: ")
   (mtaan/org-add-new-project-with-day proj (mtaan/current-day-heading)))
 
