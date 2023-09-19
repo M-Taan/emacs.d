@@ -70,3 +70,15 @@
                 (completing-read "Available days: "
                                  (mtaan/get-next-seven-days))))
   (mtaan/org-add-new-todo-under-proj-with-day proj day))
+
+(defun mtaan/org-add-current-day (target)
+  (interactive (list (completing-read "Available targets: " available-targets)))
+  (mtaan/org-add-new-day target (mtaan/current-day-heading)))
+
+(defun mtaan/org-add-new-project-today (target)
+  (interactive "sProject Name: ")
+  (mtaan/org-add-new-project-with-day proj (mtaan/current-day-heading)))
+
+(defun mtaan/org-add-new-todo-under-proj-today (proj)
+  (interactive "sProject Name: ")
+  (mtaan/org-add-new-todo-under-proj-with-day proj (mtaan/current-day-heading)))
