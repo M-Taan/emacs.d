@@ -19,16 +19,16 @@
   (setq org-todo-keyword-faces
         '(("PROJ" :foreground "#32cd32" :weight bold)
           ("TODO" :foreground "#adff2f" :weight bold)))
-  (setq org-agenda-files '("~/org/work.org"
-                           "~/org/personal.org"
-                           "~/org/calendar.org"))
+  (setq org-agenda-files '("~/Dropbox/org/work.org"
+                           "~/Dropbox/org/personal.org"
+                           "~/Dropbox/org/calendar.org"))
   (setq org-agenda-timegrid-use-ampm t)
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done t)
   (setq org-log-into-drawer t)
   (setq org-ellipsis " ▼")
   (setq org-capture-templates
-        (doct '(("Work" :keys "w" :file "~/org/work.org" :children
+        (doct '(("Work" :keys "w" :file "~/Dropbox/org/work.org" :children
                  (("TODO" :keys "t" :empty-lines 1 :headline "Tasks" :template ("** TODO %^{Description} :project:%^g"
                                                                                 ":PROPERTIES:"
                                                                                 ":Created: %U"
@@ -36,7 +36,7 @@
                                                                                 ":Description: %^{PROMPT}"
                                                                                 ":END:"
                                                                                 "%?"))))
-                ("Personal" :keys "p" :file "~/org/personal.org" :children
+                ("Personal" :keys "p" :file "~/Dropbox/org/personal.org" :children
                  (("TODO" :keys "t" :empty-lines 1 :headline "Tasks" :template ("** TODO %^{Description} %^g"
                                                                                 ":PROPERTIES:"
                                                                                 ":Created: %U"
@@ -44,14 +44,6 @@
                                                                                 ":Description: %^{PROMPT}"
                                                                                 ":END:"
                                                                                 "%?")))))))
-  ;; For archiving finished tasks
-  (setq org-refile-targets
-        '(("~/org/archives/work.org" :maxlevel . 1)
-          ("~/org/archives/personal.org" :maxlevel . 1)))
-
-  ;; Refiling doesn't save the updated buffer
-  (advice-add 'org-refile :after 'org-save-all-org-buffers)
-
   (require 'org-indent)
   
   ;; Fonts
@@ -92,5 +84,5 @@
   :init
   (setq org-gcal-client-id (getenv "EMACS_GOOGLE_CALENDER_CLIENT_ID")
         org-gcal-client-secret (getenv "EMACS_GOOGLE_CALENDER_SECRET_ID")
-        org-gcal-fetch-file-alist '(("mtaan@rams.services" .  "~/org/calendar.org")))
+        org-gcal-fetch-file-alist `((,(getenv "EMACS_GOOGLE_CALENDAR_EMAIL_1") .  "~/Dropbox/org/calendar.org")))
   (setq plstore-cache-passphrase-for-symmetric-encryption t))

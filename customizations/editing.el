@@ -1,5 +1,7 @@
 (global-hl-line-mode 1)
 
+(subword-mode 1)
+
 ;; Don't use hard tabs
 (setq-default indent-tabs-mode nil)
 

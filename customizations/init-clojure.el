@@ -28,5 +28,7 @@
         cider-show-error-buffer t
         cider-auto-select-error-buffer t
         cider-repl-history-file "~/.emacs.d/cider-history"
-        cider-repl-wrap-history t))
+        cider-repl-wrap-history t)
+  (define-key cider-repl-mode-map (kbd "RET") #'cider-repl-newline-and-indent)
+  (define-key cider-repl-mode-map (kbd "C-<return>") #'cider-repl-return))
 

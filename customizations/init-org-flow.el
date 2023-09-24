@@ -12,7 +12,7 @@
   (when (or (string-empty-p target)
             (not (member target available-targets)))
     (error "Target is not valid"))
-  (find-file (concat "~/org/" target ".org"))
+  (find-file (concat "~/Dropbox/org/" target ".org"))
   (let* ((heading-exists? (org-find-exact-headline-in-buffer day)))
     (if heading-exists?
         (message "This day is already logged")
@@ -26,7 +26,7 @@
    It will also assume that I'm adding a proj under the same day"
   (when (string-empty-p proj)
     (error "Project name shouldn't be empty"))
-  (find-file "~/org/work.org")
+  (find-file "~/Dropbox/org/work.org")
   (let* ((proj-subheading (concat "PROJ " (capitalize proj)))
          (heading (org-find-exact-headline-in-buffer day nil 't)))
     (unless heading
@@ -40,7 +40,7 @@
 (defun mtaan/org-add-new-todo-under-proj-with-day (proj day)
   (when (string-empty-p proj)
     (error "Project name shouldn't be empty"))
-  (find-file "~/org/work.org")
+  (find-file "~/Dropbox/org/work.org")
   (let* ((proj-subheading (concat "PROJ " (capitalize proj)))
          (heading (org-find-exact-headline-in-buffer day nil 't)))
     (unless heading

@@ -12,6 +12,7 @@
 
   (setq lsp-headerline-breadcrumb-enable nil
         lsp-enable-indentation nil
+        lsp-use-plists t
         lsp-modeline-code-actions-enable nil
         lsp-modeline-diagnostics-enable nil
         lsp-modeline-diagnostics-mode nil
