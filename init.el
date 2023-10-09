@@ -40,8 +40,6 @@
 
 (load "init-lsp.el")
 
-(load "init-smudge.el")
-
 (load "init-stumpwm.el")
 
 (load "init-org-flow.el")
