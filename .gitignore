@@ -70,3 +70,6 @@ bookmarks
 persist/**
 projects
 eln-cache
+
+README.el
+README.org.*
