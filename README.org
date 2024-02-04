@@ -33,9 +33,9 @@ Have a dedicated file for the Custom settings
 
 *** Transparency
 #+begin_src emacs-lisp
-  (set-frame-parameter nil 'alpha-background 90)
+  (set-frame-parameter nil 'alpha-background 97)
 
-  (add-to-list 'default-frame-alist '(alpha-background . 90))
+  (add-to-list 'default-frame-alist '(alpha-background . 97)) 
 #+end_src
 
 *** Miscellaneous Settings
@@ -123,9 +123,9 @@ It mainly utilizes projectile
           (start-process-shell-command "tmux" nil (concat "alacritty -e tmux attach -t " name))
         (start-process-shell-command "tmux" nil (concat "alacritty -e tmux new-session -s " name " -c " (projectile-project-root))))))
 
-  (global-set-key (kbd "C-c b v") 'open-tmux-session-current-directory)
+  (global-set-key (kbd "C-c t v") 'open-tmux-session-current-directory)
 
-  (global-set-key (kbd "C-c b b") 'open-tmux-session-current-project-root)
+  (global-set-key (kbd "C-c t b") 'open-tmux-session-current-project-root)
 #+end_src
 
 **** Global Keybinds
@@ -133,8 +133,8 @@ It mainly utilizes projectile
   (global-set-key (kbd "C-c l") 'global-display-line-numbers-mode)
   (global-set-key (kbd "C-c =") 'comment-region)
   (global-set-key (kbd "C-c -") 'uncomment-region)
-  (global-set-key (kbd "C-c <right>") 'forward-sexp)
-  (global-set-key (kbd "C-c <left>") 'backward-sexp)
+  (global-set-key (kbd "C-c f") 'forward-sexp)
+  (global-set-key (kbd "C-c b") 'backward-sexp)
 #+end_src
 
 *** Packages
@@ -172,7 +172,7 @@ Doom modelines uses =nerd-icons= so I need that tool
 #+begin_src emacs-lisp
   (use-package prescient
     :ensure t
-    :init
+    :config
     (prescient-persist-mode 1))
 #+end_src
 
@@ -329,6 +329,15 @@ Mainly for html files
           web-mode-enable-auto-pairing t))	       
 #+end_src
 
+**** GURU Mode
+#+begin_src emacs-lisp
+  (use-package guru-mode
+    :ensure t
+    :config
+    (guru-global-mode +1))
+#+end_src
+
+
 *** Typescript
 Using emacs-29 built-in typescript modes
 
@@ -391,6 +400,20 @@ THE ONE AND TRUE PROGRAMMING LANGUAGE
           cider-repl-wrap-history t)
     (define-key cider-repl-mode-map (kbd "RET") #'cider-repl-newline-and-indent)
     (define-key cider-repl-mode-map (kbd "C-<return>") #'cider-repl-return))
+#+end_src
+
+*** Python
+#+begin_src emacs-lisp
+  (use-package elpy
+    :ensure t
+    :init
+    (elpy-enable))
+
+  (use-package python-ts-mode
+    :mode
+    ("\\.py$" . python-ts-mode)
+    :hook (python-ts-mode . elpy-mode))
+
 #+end_src
 
 ***  LSP
@@ -574,7 +597,7 @@ THE ONE AND TRUE PROGRAMMING LANGUAGE
                   (completing-read "Available Days: " (mtaan/get-next-seven-days))))
     (mtaan/org-add-new-day target day))
 
-  (defun mtaan/org-add-new-proj-other-day (proj day)
+  (defun mtaan/org-add-new-project-other-day (proj day)
     (interactive (list
                   (read-string "Project Name: ")
                   (completing-read "Available days: "
