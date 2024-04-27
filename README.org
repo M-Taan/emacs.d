@@ -402,6 +402,14 @@ THE ONE AND TRUE PROGRAMMING LANGUAGE
     (define-key cider-repl-mode-map (kbd "C-<return>") #'cider-repl-return))
 #+end_src
 
+*** Zig
+=zig-mode=
+#+begin_src emacs-lisp
+  (use-package zig-mode
+    :ensure t
+    :mode ("\\.zig$" . zig-mode))
+#+end_src
+
 *** Python
 #+begin_src emacs-lisp
   (use-package python-mode
@@ -423,8 +431,8 @@ THE ONE AND TRUE PROGRAMMING LANGUAGE
     (clojurec-mode . lsp-deferred)
     (typescript-ts-mode . lsp-deferred)
     (tsx-ts-mode . lsp-deferred)
-    ;;    (python-ts-mode . lsp-deferred)
     (python-mode . lsp-deferred)
+    (zig-mode . lsp-deferred)
     :config
     (define-key lsp-mode-map (kbd "C-c w") lsp-command-map)
 
@@ -434,6 +442,7 @@ THE ONE AND TRUE PROGRAMMING LANGUAGE
           lsp-modeline-code-actions-enable nil
           lsp-modeline-diagnostics-enable nil
           lsp-modeline-diagnostics-mode nil
+          lsp-zig-zls-executable (concat user-emacs-directory "/zig-lsp/zls/zig-out/bin/zls")
           lsp-completion-mode nil))
 
   (use-package lsp-ivy

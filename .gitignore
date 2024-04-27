@@ -72,3 +72,5 @@ eln-cache
 
 README.el
 README.org.*
+
+zig-lsp/
