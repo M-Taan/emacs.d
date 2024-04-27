@@ -404,16 +404,12 @@ THE ONE AND TRUE PROGRAMMING LANGUAGE
 
 *** Python
 #+begin_src emacs-lisp
-  (use-package elpy
-    :ensure t
-    :init
-    (elpy-enable))
-
-  (use-package python-ts-mode
+  (use-package python-mode
     :mode
-    ("\\.py$" . python-ts-mode)
-    :hook (python-ts-mode . elpy-mode))
+    ("\\.py$" . python-mode))
 
+  (use-package lsp-pyright
+    :ensure t)
 #+end_src
 
 ***  LSP
@@ -427,6 +423,8 @@ THE ONE AND TRUE PROGRAMMING LANGUAGE
     (clojurec-mode . lsp-deferred)
     (typescript-ts-mode . lsp-deferred)
     (tsx-ts-mode . lsp-deferred)
+    ;;    (python-ts-mode . lsp-deferred)
+    (python-mode . lsp-deferred)
     :config
     (define-key lsp-mode-map (kbd "C-c w") lsp-command-map)
 
