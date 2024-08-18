@@ -20,6 +20,7 @@ Initialize the package archive
 ** Base Configuration
 *** Custom
 Have a dedicated file for the Custom settings
+
 #+begin_src emacs-lisp
   (setq custom-file "~/.emacs.d/custom.el")
   (load custom-file)
@@ -68,6 +69,9 @@ Some random settings that I find helpful
   (electric-indent-mode +1)
   (electric-pair-mode t)
   (delete-selection-mode 1)
+  (global-display-line-numbers-mode 1)
+  (setq display-line-numbers-type 'relative) 
+  (setq scroll-margin 10)
 #+end_src
 
 **** Grep
@@ -78,26 +82,6 @@ Automatically switch to the grep buffer
             #'(lambda ()
                 (switch-to-buffer-other-window "*grep*")))
 #+end_src
-
-**** Splitting Windows
- Upon splitting a window I want to move to that buffer automatically
- 
- #+begin_src emacs-lisp
-   (defun split-window-and-switch-below ()
-     (interactive)
-     (split-window-below)
-     (balance-windows)
-     (other-window 1))
-
-   (defun split-window-and-switch-right ()
-     (interactive)
-     (split-window-right)
-     (balance-windows)
-     (other-window 1))
-
-   (global-set-key (kbd "C-x 2") 'split-window-and-switch-below)
-   (global-set-key (kbd "C-x 3") 'split-window-and-switch-right)
- #+end_src
 
 **** Tmux
 Opening tmux sessions from emacs at point or at the current directory
@@ -123,42 +107,68 @@ It mainly utilizes projectile
           (start-process-shell-command "tmux" nil (concat "alacritty -e tmux attach -t " name))
         (start-process-shell-command "tmux" nil (concat "alacritty -e tmux new-session -s " name " -c " (projectile-project-root))))))
 
-  (global-set-key (kbd "C-c t v") 'open-tmux-session-current-directory)
-
-  (global-set-key (kbd "C-c t b") 'open-tmux-session-current-project-root)
-#+end_src
-
-**** Global Keybinds
-#+begin_src emacs-lisp
-  (global-set-key (kbd "C-c l") 'global-display-line-numbers-mode)
-  (global-set-key (kbd "C-c =") 'comment-region)
-  (global-set-key (kbd "C-c -") 'uncomment-region)
-  (global-set-key (kbd "C-c f") 'forward-sexp)
-  (global-set-key (kbd "C-c b") 'backward-sexp)
 #+end_src
 
 *** Packages
+
+**** Evil
+#+begin_src emacs-lisp
+  (use-package evil
+    :ensure t
+    :custom
+    (evil-undo-system 'undo-redo)
+    (evil-want-C-u-scroll t)
+    (evil-want-keybinding nil)
+    :config
+    (evil-mode 1)
+    (evil-set-leader nil (kbd "C-SPC"))
+    (evil-set-leader 'normal (kbd "SPC")))
+
+  (use-package evil-collection
+    :ensure t
+    :after evil
+    :config
+    (evil-collection-init))
+#+end_src
+
+**** Keymaps
+#+begin_src emacs-lisp
+  (evil-define-key 'normal lsp-mode-map (kbd "<leader>l") lsp-command-map)
+  (evil-define-key 'normal projectile-mode-map (kbd "<leader>p") projectile-command-map)
+
+  (evil-define-key nil 'global
+		   (kbd "<leader>sb") 'counsel-switch-buffer
+		   (kbd "<leader>tc") 'open-tmux-session-current-directory
+		   (kbd "<leader>tr") 'open-tmux-session-current-project-root)
+#+end_src
+
+**** Magit
+#+begin_src emacs-lisp
+  (use-package magit
+    :ensure t)
+#+end_src
 
 **** UI
 For themes, =doom-themes= is the way to go for me accompanied with =doom-modeline=
 
 #+begin_src emacs-lisp
-  (use-package doom-themes
-  :ensure t
-  :config
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
-  (load-theme 'doom-city-lights t))
+    (use-package doom-themes
+    :ensure t
+    :config
+    (setq doom-themes-enable-bold t
+          doom-themes-enable-italic t)
+    (load-theme 'doom-tokyo-night t)
+    (set-face-foreground 'line-number-current-line "#ff9e64"))
 
-  (use-package doom-modeline
-  :ensure t
-  :init
-  (doom-modeline-mode 1)
-  :config
-  (setq doom-modeline-battery t
-        doom-modeline-icon t
-        doom-modeline-major-mode-icon t
-        doom-modeline-major-mode-color-icon t))
+    (use-package doom-modeline
+    :ensure t
+    :init
+    (doom-modeline-mode 1)
+    :config
+    (setq doom-modeline-battery t
+          doom-modeline-icon t
+          doom-modeline-major-mode-icon t
+          doom-modeline-major-mode-color-icon t))
 #+end_src
 
 Doom modelines uses =nerd-icons= so I need that tool
@@ -190,7 +200,6 @@ Doom modelines uses =nerd-icons= so I need that tool
   (use-package counsel
     :ensure t
     :after ivy
-    :bind ("C-x b" . counsel-switch-buffer)
     :init (counsel-mode 1))
 
   (use-package ivy-prescient
@@ -199,23 +208,12 @@ Doom modelines uses =nerd-icons= so I need that tool
     :init (ivy-prescient-mode 1))
 #+end_src
 
-Projectile, well it's projectile (the freaking best)
+Projectile, well it's projectile 
 
 #+begin_src emacs-lisp
   (use-package projectile
     :ensure t
-    :bind ("C-c p" . projectile-command-map)
     :init (projectile-mode +1)) 
-#+end_src
-
-Ace jump mode, to jump around like a monkey hehehe
-
-#+begin_src emacs-lisp
-  (use-package ace-jump-mode
-    :ensure t
-    :bind
-    ("<insert>" . ace-jump-mode)
-    ("C-<insert>" . ace-jump-mode-pop-mark))
 #+end_src
 
 **** Treesitter
@@ -293,17 +291,6 @@ LONG LIVE THE ONE AND TRUE WINDOW MANAGER
     :ensure t)
 #+end_src
 
-**** Yaml
-#+begin_src emacs-lisp
-  (use-package yaml-mode
-  :ensure t
-  :mode ("\\.yml\\'")
-  :config
-  (add-hook 'yaml-mode-hook
-            #'(lambda ()
-                (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
-#+end_src
-
 **** Web
 Mainly for html files
 
@@ -328,15 +315,6 @@ Mainly for html files
           web-mode-enable-auto-closing t	       
           web-mode-enable-auto-pairing t))	       
 #+end_src
-
-**** GURU Mode
-#+begin_src emacs-lisp
-  (use-package guru-mode
-    :ensure t
-    :config
-    (guru-global-mode +1))
-#+end_src
-
 
 *** Typescript
 Using emacs-29 built-in typescript modes
@@ -397,9 +375,7 @@ THE ONE AND TRUE PROGRAMMING LANGUAGE
           cider-show-error-buffer t
           cider-auto-select-error-buffer t
           cider-repl-history-file "~/.emacs.d/cider-history"
-          cider-repl-wrap-history t)
-    (define-key cider-repl-mode-map (kbd "RET") #'cider-repl-newline-and-indent)
-    (define-key cider-repl-mode-map (kbd "C-<return>") #'cider-repl-return))
+          cider-repl-wrap-history t))
 #+end_src
 
 *** Zig
@@ -408,16 +384,6 @@ THE ONE AND TRUE PROGRAMMING LANGUAGE
   (use-package zig-mode
     :ensure t
     :mode ("\\.zig$" . zig-mode))
-#+end_src
-
-*** Python
-#+begin_src emacs-lisp
-  (use-package python-mode
-    :mode
-    ("\\.py$" . python-mode))
-
-  (use-package lsp-pyright
-    :ensure t)
 #+end_src
 
 ***  LSP
@@ -434,8 +400,6 @@ THE ONE AND TRUE PROGRAMMING LANGUAGE
     (python-mode . lsp-deferred)
     (zig-mode . lsp-deferred)
     :config
-    (define-key lsp-mode-map (kbd "C-c w") lsp-command-map)
-
     (setq lsp-headerline-breadcrumb-enable nil
           lsp-enable-indentation nil
           lsp-use-plists t
@@ -455,8 +419,6 @@ THE ONE AND TRUE PROGRAMMING LANGUAGE
     (set-face-attribute 'lsp-ui-sideline-global nil
                         :background "black")
     (setq lsp-ui-doc-enable nil)
-    (define-key lsp-mode-map (kbd "C-c w s d") #'lsp-ui-doc-toggle)
-    (define-key lsp-mode-map (kbd "C-c w s f") #'lsp-ui-doc-focus-frame)
     :custom
     (lsp-ui-sideline-show-diagnostics t)
     (lsp-ui-doc-position 'top))
@@ -480,10 +442,7 @@ THE ONE AND TRUE PROGRAMMING LANGUAGE
     (org-agenda-mode . org-mode-init-hook)
     :config  
     (setq org-todo-keywords '((type "TODO(t)" "PROJ(p)" "|" "DONE(d)")))
-    (setq org-todo-keyword-faces
-          '(("PROJ" :foreground "#32cd32" :weight bold)
-            ("TODO" :foreground "#adff2f" :weight bold)))
-    (setq org-agenda-files '("~/Dropbox/org/work.org"
+    setq org-agenda-files '("~/Dropbox/org/work.org"
                              "~/Dropbox/org/personal.org"
                              "~/Dropbox/org/calendar.org"))
     (setq org-agenda-timegrid-use-ampm t)
