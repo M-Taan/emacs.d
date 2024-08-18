@@ -134,12 +134,15 @@ It mainly utilizes projectile
 **** Keymaps
 #+begin_src emacs-lisp
   (evil-define-key 'normal lsp-mode-map (kbd "<leader>l") lsp-command-map)
-  (evil-define-key 'normal projectile-mode-map (kbd "<leader>p") projectile-command-map)
+  (evil-define-key nil projectile-mode-map (kbd "<leader>p") projectile-command-map)
 
-  (evil-define-key nil 'global
-		   (kbd "<leader>sb") 'counsel-switch-buffer
-		   (kbd "<leader>tc") 'open-tmux-session-current-directory
-		   (kbd "<leader>tr") 'open-tmux-session-current-project-root)
+  (evil-define-key nil  'global
+    (kbd "<leader>sb")  'counsel-switch-buffer
+    (kbd "<leader>tc")  'open-tmux-session-current-directory
+    (kbd "<leader>tr")  'open-tmux-session-current-project-root
+    (kbd "<leader>rg")  'counsel-rg
+    (kbd "<leader>fzf") 'counsel-fzf
+    (kbd "<leader>csb") 'counsel-search)
 #+end_src
 
 **** Magit
@@ -442,7 +445,7 @@ THE ONE AND TRUE PROGRAMMING LANGUAGE
     (org-agenda-mode . org-mode-init-hook)
     :config  
     (setq org-todo-keywords '((type "TODO(t)" "PROJ(p)" "|" "DONE(d)")))
-    setq org-agenda-files '("~/Dropbox/org/work.org"
+    (setq org-agenda-files '("~/Dropbox/org/work.org"
                              "~/Dropbox/org/personal.org"
                              "~/Dropbox/org/calendar.org"))
     (setq org-agenda-timegrid-use-ampm t)
