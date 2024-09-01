@@ -131,7 +131,7 @@ It mainly utilizes projectile
     (evil-collection-init))
 #+end_src
 
-**** Keymaps
+***** Keymaps
 #+begin_src emacs-lisp
   (evil-define-key 'normal lsp-mode-map (kbd "<leader>l") lsp-command-map)
   (evil-define-key nil projectile-mode-map (kbd "<leader>p") projectile-command-map)
@@ -142,7 +142,27 @@ It mainly utilizes projectile
     (kbd "<leader>tr")  'open-tmux-session-current-project-root
     (kbd "<leader>rg")  'counsel-rg
     (kbd "<leader>fzf") 'counsel-fzf
-    (kbd "<leader>csb") 'counsel-search)
+    (kbd "<leader>csb") 'counsel-search
+    (kbd "<leader>ff")  'counsel-find-file)
+#+end_src
+
+**** Gptel
+#+begin_src emacs-lisp
+  (use-package gptel
+    :ensure t
+    :custom
+    (gptel-prompt-prefix-alist
+     '((markdown-mode . "# ")
+       (org-mode . "")
+       (text-mode . "# ")))
+    :config
+    (setq
+     gptel-model "gemma2:2b"
+     gptel-backend (gptel-make-ollama "Ollama"
+                     :host "localhost:11434"
+                     :stream t
+                     :models '("gemma2:2b"))
+     gptel-default-mode 'org-mode))        
 #+end_src
 
 **** Magit
