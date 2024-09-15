@@ -32,13 +32,6 @@ Have a dedicated file for the Custom settings
                '(font . "DejaVu Sans Mono-12"))
 #+end_src
 
-*** Transparency
-#+begin_src emacs-lisp
-  (set-frame-parameter nil 'alpha-background 97)
-
-  (add-to-list 'default-frame-alist '(alpha-background . 97)) 
-#+end_src
-
 *** Miscellaneous Settings
 Some random settings that I find helpful
 
@@ -270,16 +263,6 @@ Behold the beauty of treesitter
     :config
     (yas-global-mode 1))
 #+end_src
-
-**** Xclip
-Copy to and paste from the GUI clipboard when running in terminal.
-
-#+begin_src emacs-lisp
-  (use-package xclip
-    :ensure t
-    :init (xclip-mode 1))
-#+end_src
-
 
 **** Eldoc
 #+begin_src emacs-lisp
