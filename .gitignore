@@ -74,3 +74,4 @@ README.el
 README.org.*
 
 zig-lsp/
+odin-lsp/

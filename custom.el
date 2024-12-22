@@ -10,7 +10,9 @@
    '("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" "node_modules"))
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(org-gcal org-bullets flycheck lsp-ui lsp-ivy lsp-mode zig-mode cider clojure-mode prettier-js add-node-modules-path web-mode tagedit stumpwm-mode paredit xclip yasnippet company-prescient company projectile ivy-prescient counsel ivy prescient doom-modeline doom-themes magit gptel evil-collection evil)))
+   '(odin-mode org-gcal org-bullets flycheck lsp-ui lsp-ivy lsp-mode zig-mode cider clojure-mode prettier-js add-node-modules-path web-mode tagedit stumpwm-mode paredit xclip yasnippet company-prescient company projectile ivy-prescient counsel ivy prescient doom-modeline doom-themes magit gptel evil-collection evil))
+ '(package-vc-selected-packages
+   '((odin-mode :vc-backend Git :url "https://git.sr.ht/~mgmarlow/odin-mode"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
