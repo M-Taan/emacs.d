@@ -135,7 +135,9 @@ It mainly utilizes projectile
     (kbd "<leader>rg")  'counsel-rg
     (kbd "<leader>fzf") 'counsel-fzf
     (kbd "<leader>csb") 'counsel-search
-    (kbd "<leader>ff")  'counsel-find-file)
+    (kbd "<leader>ff")  'counsel-find-file
+    (kbd "<leader>rc")  'compile
+    (kbd "<leader>rr")  'recompile)
 #+end_src
 
 **** Gptel
@@ -415,6 +417,12 @@ THE ONE AND TRUE PROGRAMMING LANGUAGE
 (add-hook 'odin-mode-hook #'lsp)
 #+end_src
 
+*** C
+#+begin_src emacs-lisp
+  (use-package clang-format
+    :ensure t)
+#+end_src
+
 ***  LSP
 #+begin_src emacs-lisp
   (use-package lsp-mode
@@ -454,6 +462,35 @@ THE ONE AND TRUE PROGRAMMING LANGUAGE
 
   (use-package flycheck
     :ensure t)
+#+end_src
+
+*** Blogging
+#+begin_src emacs-lisp
+  (defconst blog-dir (concat (getenv "HOME") "/workspace/personal/m-taan.github.io/"))
+
+  (use-package org-static-blog
+    :ensure t
+    :config
+    (setq org-static-blog-publish-title "From First Principles")
+    (setq org-static-blog-publish-url "https://m-taan.github.io")
+    (setq org-static-blog-publish-directory "~/workspace/personal/m-taan.github.io/")
+    (setq org-static-blog-posts-directory "~/workspace/personal/m-taan.github.io/posts/")
+    (setq org-static-blog-drafts-directory "~/workspace/personal/m-taan.github.io/drafts/")
+    (setq org-static-blog-enable-tags t)
+    (setq org-export-with-toc nil)
+    (setq org-export-with-section-numbers nil)
+    (setq org-static-blog-page-header (with-temp-buffer
+					(insert-file-contents (concat blog-dir "public/header.html"))
+					(buffer-string)))
+    (setq org-static-blog-page-preamble (with-temp-buffer
+					  (insert-file-contents (concat blog-dir "public/preamble.html"))
+					  (buffer-string)))
+    (setq org-static-blog-page-postamble (with-temp-buffer
+					   (insert-file-contents (concat blog-dir "public/postamble.html"))
+					   (buffer-string)))
+    (setq org-static-blog-index-front-matter (with-temp-buffer
+					       (insert-file-contents (concat blog-dir "public/front-matter.html"))
+					       (buffer-string))))
 #+end_src
 
 *** Org
