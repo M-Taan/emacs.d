@@ -75,3 +75,4 @@ README.org.*
 
 zig-lsp/
 odin-lsp/
+.aider*

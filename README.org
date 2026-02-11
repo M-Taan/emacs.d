@@ -145,14 +145,14 @@ It mainly utilizes projectile
   (use-package aidermacs
     :ensure t
     :bind (("C-c a" . aidermacs-transient-menu))
-    :config
     :custom
-    (aidermacs-auto-commits nil)
+    (aidermacs-auto-commits t)
     (aidermacs-default-chat-mode 'architect)
     (aidermacs-show-diff-after-change t)
-    ;;(aidermacs-extra-args '("--reasoning-effort" "high"))
+    (aidermacs-extra-args '("--reasoning-effort" "high"))
     (aidermacs-editor-model "openrouter/anthropic/claude-3.7-sonnet")
-    (aidermacs-architect-model "openrouter/qwen/qwen3-max"))
+    (aidermacs-architect-model "openrouter/qwen/qwen3-max")
+    (aidermacs-fallback-model "openrouter/anthropic/claude-3.5-sonnet"))
 #+end_src
 
 **** Magit
