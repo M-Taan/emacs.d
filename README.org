@@ -9,12 +9,12 @@ In addition to this file the configuration are split into 2 more file:
 Initialize the package archive
 
 #+begin_src emacs-lisp
-  (require 'package)
+    (require 'package)
 
-  (setq package-archives
-  '(("melpa" . "https://melpa.org/packages/")
-    ("org" . "https://orgmode.org/elpa/")
-    ("elpa" . "https://elpa.gnu.org/packages/")))
+    (setq package-archives
+    '(("melpa" . "https://melpa.org/packages/")
+      ("org" . "https://orgmode.org/elpa/")
+      ("elpa" . "https://elpa.gnu.org/packages/")))
 #+end_src
 
 ** Base Configuration
@@ -140,19 +140,45 @@ It mainly utilizes projectile
     (kbd "<leader>rr")  'recompile)
 #+end_src
 
-**** Aider
+**** Minuet
 #+begin_src emacs-lisp
-  (use-package aidermacs
+  (use-package minuet
     :ensure t
-    :bind (("C-c a" . aidermacs-transient-menu))
-    :custom
-    (aidermacs-auto-commits t)
-    (aidermacs-default-chat-mode 'architect)
-    (aidermacs-show-diff-after-change t)
-    (aidermacs-extra-args '("--reasoning-effort" "high"))
-    (aidermacs-editor-model "openrouter/anthropic/claude-3.7-sonnet")
-    (aidermacs-architect-model "openrouter/qwen/qwen3-max")
-    (aidermacs-fallback-model "openrouter/anthropic/claude-3.5-sonnet"))
+
+    :bind
+    (("M-i"   . #'minuet-show-suggestion)
+     ("M-y"   . #'minuet-complete-with-minibuffer)
+     ("C-c m" . #'minuet-configure-provider)
+     :map minuet-active-mode-map
+     ("M-A" . #'minuet-accept-suggestion)
+     ("M-a" . #'minuet-accept-suggestion-line)
+     ("M-p" . #'minuet-previous-suggestion)
+     ("M-n" . #'minuet-next-suggestion)
+     ("M-e" . #'minuet-dismiss-suggestion))
+
+    :init
+    (add-hook 'prog-mode-hook #'minuet-auto-suggestion-mode)
+    ;; Required for Evil: re-normalizes keymaps when a minuet suggestion appears
+    (add-hook 'minuet-active-mode-hook #'evil-normalize-keymaps)
+
+    :config
+    (setq minuet-provider 'openai-compatible)
+    (setq minuet-request-timeout               10.0)
+    (setq minuet-auto-suggestion-debounce-delay 0.6)
+    (setq minuet-auto-suggestion-throttle-delay 1.5)
+    (minuet-set-optional-options minuet-openai-compatible-options 
+                                 :reasoning '(:effort "none"))
+
+    (plist-put minuet-openai-fim-compatible-options :end-point 
+               "https://openrouter.ai/api/v1/chat/completions")
+    (plist-put minuet-openai-compatible-options :api-key "MINUET_OPENROUTER_API_KEY")
+    (plist-put minuet-openai-compatible-options :model "deepseek/deepseek-v4-flash")
+
+
+    ;; Prioritize throughput for faster completion
+    (minuet-set-optional-options minuet-openai-compatible-options :provider '(:sort "throughput"))
+    (minuet-set-optional-options minuet-openai-compatible-options :max_tokens 256)
+    (minuet-set-optional-options minuet-openai-compatible-options :top_p 0.9))
 #+end_src
 
 **** Magit
@@ -235,8 +261,15 @@ Behold the beauty of treesitter
 #+begin_src emacs-lisp
   (use-package treesit
     :custom
-    (treesit-font-lock-level 4)
-    (treesit-extra-load-path `(,(concat (getenv "HOME") "/.emacs.d/dist/"))))
+    (treesit-font-lock-level 2)
+    (treesit-language-source-alist
+     '((tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+       (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")))
+    :config
+    (dolist (lang '(typescript tsx))
+      (unless (treesit-ready-p lang)
+        (treesit-install-language-grammar lang)
+        (message "Installed treesit grammar for %s" lang))))
 #+end_src
 
 **** Editing
@@ -343,8 +376,9 @@ Using emacs-29 built-in typescript modes
     (tsx-ts-mode . prettier-js-hook)
     (typescript-ts-mode . lsp-mode)
     (tsx-ts-mode . lsp-mode)
-    :mode (("\\.ts\\'" . typescript-ts-mode))
-    :mode (("\\.tsx\\'" . tsx-ts-mode)))
+    :mode
+    ("\\.ts\\'" . typescript-ts-mode)
+    ("\\.tsx\\'" . tsx-ts-mode))
 #+end_src
 
 *** Clojure
@@ -463,34 +497,6 @@ THE ONE AND TRUE PROGRAMMING LANGUAGE
       :ensure t)
 #+end_src
 
-*** Blogging
-#+begin_src emacs-lisp
-  (defconst blog-dir (concat (getenv "HOME") "/workspace/personal/m-taan.github.io/"))
-
-  (use-package org-static-blog
-    :ensure t
-    :config
-    (setq org-static-blog-publish-title "From First Principles")
-    (setq org-static-blog-publish-url "https://m-taan.github.io")
-    (setq org-static-blog-publish-directory "~/workspace/personal/m-taan.github.io/")
-    (setq org-static-blog-posts-directory "~/workspace/personal/m-taan.github.io/posts/")
-    (setq org-static-blog-drafts-directory "~/workspace/personal/m-taan.github.io/drafts/")
-    (setq org-static-blog-enable-tags t)
-    (setq org-export-with-toc nil)
-    (setq org-export-with-section-numbers nil)
-    (setq org-static-blog-page-header (with-temp-buffer
-					(insert-file-contents (concat blog-dir "public/header.html"))
-					(buffer-string)))
-    (setq org-static-blog-page-preamble (with-temp-buffer
-					  (insert-file-contents (concat blog-dir "public/preamble.html"))
-					  (buffer-string)))
-    (setq org-static-blog-page-postamble (with-temp-buffer
-					   (insert-file-contents (concat blog-dir "public/postamble.html"))
-					   (buffer-string)))
-    (setq org-static-blog-index-front-matter (with-temp-buffer
-					       (insert-file-contents (concat blog-dir "public/front-matter.html"))
-					       (buffer-string))))
-#+end_src
 
 *** Org
 #+begin_src emacs-lisp

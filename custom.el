@@ -5,7 +5,8 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(doom-tokyo-night))
  '(custom-safe-themes
-   '("0d2c5679b6d087686dcfd4d7e57ed8e8aedcccc7f1a478cd69704c02e4ee36fe"
+   '("720838034f1dd3b3da66f6bd4d053ee67c93a747b219d1c546c41c4e425daf93"
+     "0d2c5679b6d087686dcfd4d7e57ed8e8aedcccc7f1a478cd69704c02e4ee36fe"
      "77fff78cc13a2ff41ad0a8ba2f09e8efd3c7e16be20725606c095f9a19c24d3d"
      "32f22d075269daabc5e661299ca9a08716aa8cda7e85310b9625c434041916af"
      "4b88b7ca61eb48bb22e2a4b589be66ba31ba805860db9ed51b4c484f3ef612a7"
@@ -127,10 +128,11 @@
 			   counsel doom-modeline doom-themes evil
 			   evil-collection flycheck gptel ivy
 			   ivy-prescient lsp-inline-errors lsp-ivy
-			   lsp-mode lsp-ui magit odin-mode org-bullets
-			   org-gcal org-static-blog paredit prescient
-			   prettier-js projectile stumpwm-mode tagedit
-			   web-mode xclip yasnippet zig-mode))
+			   lsp-mode lsp-ui magit minuet odin-mode
+			   org-bullets org-gcal org-static-blog
+			   paredit plz prescient prettier-js
+			   projectile stumpwm-mode tagedit web-mode
+			   xclip yasnippet zig-mode))
  '(package-vc-selected-packages
    '((odin-mode :vc-backend Git :url
 		"https://git.sr.ht/~mgmarlow/odin-mode"))))
