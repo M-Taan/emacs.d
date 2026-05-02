@@ -1,0 +1,7 @@
+* Zig
+=zig-mode=
+
+#+begin_src emacs-lisp
+  (use-package zig-mode
+    :mode ("\\.zig$" . zig-mode))
+#+end_src

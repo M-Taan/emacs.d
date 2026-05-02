@@ -1,0 +1,47 @@
+* Evil
+Vim keybindings everywhere.
+
+#+begin_src emacs-lisp
+  (use-package evil
+    :custom
+    (evil-undo-system 'undo-redo)
+    (evil-want-C-u-scroll t)
+    (evil-want-keybinding nil)
+    :config
+    (evil-mode 1)
+    (evil-set-leader nil (kbd "C-SPC"))
+    (evil-set-leader 'normal (kbd "SPC")))
+
+  (use-package evil-collection
+    :after evil
+    :config
+    (evil-collection-init))
+#+end_src
+
+** Keymaps
+#+begin_src emacs-lisp
+  (with-eval-after-load 'lsp-mode
+    (evil-define-key 'normal lsp-mode-map (kbd "<leader>l") lsp-command-map))
+  (evil-define-key nil projectile-mode-map (kbd "<leader>p") projectile-command-map)
+
+  (evil-define-key nil  'global
+    (kbd "<leader>sb")  'consult-buffer
+    (kbd "<leader>tc")  'open-tmux-session-current-directory
+    (kbd "<leader>tr")  'open-tmux-session-current-project-root
+    (kbd "<leader>rg")  'consult-ripgrep
+    (kbd "<leader>fd")  'consult-fd
+    (kbd "<leader>ss")  'consult-line
+    (kbd "<leader>ff")  'find-file
+    (kbd "<leader>rc")  'compile
+    (kbd "<leader>rr")  'recompile)
+#+end_src
+
+** Which-key
+Discover available keybindings when pausing after a prefix key.
+
+#+begin_src emacs-lisp
+  (use-package which-key
+    :defer 2
+    :config
+    (which-key-mode 1))
+#+end_src

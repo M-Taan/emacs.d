@@ -1,0 +1,118 @@
+* Completion
+** Vertico
+Vertical minibuffer completion UI. Replaces =ivy=.
+
+#+begin_src emacs-lisp
+  (use-package vertico
+    :init
+    (vertico-mode 1)
+    (setq vertico-count 20)
+    (setq vertico-resize t)
+    (setq vertico-cycle t))
+#+end_src
+
+** Savehist
+Persist minibuffer history across sessions. Vertico sorts by history position.
+
+#+begin_src emacs-lisp
+  (use-package savehist
+    :straight nil
+    :init
+    (savehist-mode 1))
+#+end_src
+
+** Orderless
+Flexible multi-component completion style for both Vertico and Corfu.
+
+#+begin_src emacs-lisp
+  (use-package orderless
+    :custom
+    (completion-styles '(orderless basic))
+    (completion-category-overrides '((file (styles partial-completion))))
+    (completion-category-defaults nil))
+#+end_src
+
+** Marginalia
+Rich annotations in the minibuffer.
+
+#+begin_src emacs-lisp
+  (use-package marginalia
+    :init
+    (marginalia-mode 1))
+#+end_src
+
+** Embark
+Context-sensitive actions on any minibuffer candidate.
+
+#+begin_src emacs-lisp
+  (use-package embark
+    :bind
+    (("C-." . embark-act)
+     ("M-." . embark-dwim)
+     ("C-h B" . embark-bindings)))
+
+  (use-package embark-consult)
+#+end_src
+
+** Consult
+Enhanced completion commands. Replaces =counsel=.
+
+#+begin_src emacs-lisp
+  (use-package consult
+    :bind
+    (("C-c b" . consult-buffer)
+     ("C-c k" . consult-kmacro))
+    :custom
+    (consult-narrow-key "<")
+    (xref-show-xrefs-function 'consult-xref)
+    (xref-show-definitions-function 'consult-xref))
+#+end_src
+
+** Minibuffer Settings
+#+begin_src emacs-lisp
+  (use-package emacs
+    :straight nil
+    :custom
+    (enable-recursive-minibuffers t)
+    (read-extended-command-predicate #'command-completion-default-include-p)
+    (minibuffer-prompt-properties
+     '(read-only t cursor-intangible t face minibuffer-prompt)))
+#+end_src
+
+** Corfu
+In-buffer completion popup. Replaces =company=.
+
+#+begin_src emacs-lisp
+  (use-package corfu
+    :custom
+    (corfu-cycle t)
+    (corfu-auto t)
+    (corfu-auto-delay 0.2)
+    (corfu-quit-no-match 'separator)
+    (corfu-preselect 'prompt)
+    :bind
+    (:map corfu-map
+          ("RET" . nil))
+    :init
+    (global-corfu-mode 1)
+    (corfu-history-mode 1))
+
+  (use-package cape)
+
+  ;; Emacs settings for Corfu
+  (use-package emacs
+    :straight nil
+    :custom
+    (tab-always-indent 'complete)
+    (text-mode-ispell-word-completion nil))
+#+end_src
+
+** Kind Icon
+Nerd-icons in Corfu popup.
+
+#+begin_src emacs-lisp
+  (use-package kind-icon
+    :after corfu
+    :config
+    (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+#+end_src

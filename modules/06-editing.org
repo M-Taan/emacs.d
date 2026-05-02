@@ -1,0 +1,54 @@
+* Editing
+** Yasnippet
+Snippet expansion.
+
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :config
+    (yas-global-mode 1))
+#+end_src
+
+** Paredit
+Structural editing for all lisps.
+
+#+begin_src emacs-lisp
+  (use-package paredit
+    :init
+    (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
+    (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+    (add-hook 'ielm-mode-hook #'enable-paredit-mode)
+    (add-hook 'lisp-mode-hook #'enable-paredit-mode)
+    (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+    (add-hook 'scheme-mode-hook #'enable-paredit-mode)
+    :config
+    (show-paren-mode t))
+#+end_src
+
+** Eldoc
+Inline documentation for lisp modes.
+
+#+begin_src emacs-lisp
+  (use-package eldoc
+    :straight nil
+    :hook
+    (emacs-lisp-mode . turn-on-eldoc-mode)
+    (lisp-interaction-mode . turn-on-eldoc-mode)
+    (ielm-mode . turn-on-eldoc-mode))
+#+end_src
+
+** Vundo
+Visual undo tree browser.
+
+#+begin_src emacs-lisp
+  (use-package vundo
+    :bind ("<f5>" . vundo)
+    :custom
+    (vundo-compact-display t))
+#+end_src
+
+** Wgrep
+Edit grep results inline.
+
+#+begin_src emacs-lisp
+  (use-package wgrep)
+#+end_src

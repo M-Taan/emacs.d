@@ -1,0 +1,141 @@
+* UI
+** Themes
+=doom-themes= is the way to go, accompanied with =doom-modeline=.
+
+#+begin_src emacs-lisp
+    (defun taan/apply-tokyo-modeline ()
+      (when (facep 'mode-line)
+        (set-face-attribute 'mode-line nil
+                            :background "#1a1b26"
+                            :foreground "#c0caf5"
+                            :box '(:line-width 1 :color "#bb9af7" :style nil)))
+      (when (facep 'mode-line-inactive)
+        (set-face-attribute 'mode-line-inactive nil
+                            :background "#13141c"
+                            :foreground "#565f89"
+                            :box '(:line-width 1 :color "#51587a" :style nil)))
+      (when (facep 'mode-line-emphasis)
+        (set-face-attribute 'mode-line-emphasis nil
+                            :foreground "#bb9af7"))
+      (when (facep 'mode-line-buffer-id)
+        (set-face-attribute 'mode-line-buffer-id nil
+                            :foreground "#bb9af7"
+                            :weight 'bold))
+      (when (facep 'doom-modeline-bar)
+        (set-face-attribute 'doom-modeline-bar nil
+                            :background "#bb9af7"))
+      (when (facep 'doom-modeline-bar-inactive)
+        (set-face-attribute 'doom-modeline-bar-inactive nil
+                            :background "#51587a"))
+      (when (facep 'doom-modeline-buffer-path)
+        (set-face-attribute 'doom-modeline-buffer-path nil
+                            :foreground "#bb9af7"
+                            :weight 'bold))
+      (when (facep 'doom-modeline-buffer-file)
+        (set-face-attribute 'doom-modeline-buffer-file nil
+                            :foreground "#9aa5ce"
+                            :weight 'normal))
+      (when (facep 'doom-modeline-buffer-major-mode)
+        (set-face-attribute 'doom-modeline-buffer-major-mode nil
+                            :foreground "#bb9af7"
+                            :weight 'bold))
+      (when (facep 'doom-modeline-project-dir)
+        (set-face-attribute 'doom-modeline-project-dir nil
+                            :foreground "#7aa2f7"
+                            :weight 'bold))
+      (when (facep 'doom-modeline-project-parent-dir)
+        (set-face-attribute 'doom-modeline-project-parent-dir nil
+                            :foreground "#565f89"))
+      (when (facep 'doom-modeline-info)
+        (set-face-attribute 'doom-modeline-info nil
+                            :foreground "#73daca"))
+      (when (facep 'doom-modeline-warning)
+        (set-face-attribute 'doom-modeline-warning nil
+                            :foreground "#e0af68"))
+      (when (facep 'doom-modeline-error)
+        (set-face-attribute 'doom-modeline-error nil
+                            :foreground "#f7768e"))
+      (when (facep 'doom-modeline-debug)
+        (set-face-attribute 'doom-modeline-debug nil
+                            :foreground "#ff9e64"))
+      (when (facep 'doom-modeline-vcs-icon)
+        (set-face-attribute 'doom-modeline-vcs-icon nil
+                            :foreground "#bb9af7"))
+      (when (facep 'doom-modeline-evil-insert-state)
+        (set-face-attribute 'doom-modeline-evil-insert-state nil
+                            :foreground "#73daca"))
+      (when (facep 'doom-modeline-evil-normal-state)
+        (set-face-attribute 'doom-modeline-evil-normal-state nil
+                            :foreground "#7aa2f7"))
+      (when (facep 'doom-modeline-evil-visual-state)
+        (set-face-attribute 'doom-modeline-evil-visual-state nil
+                            :foreground "#ff9e64"))
+      (when (facep 'doom-modeline-evil-replace-state)
+        (set-face-attribute 'doom-modeline-evil-replace-state nil
+                            :foreground "#f7768e"))
+      (when (facep 'doom-modeline-evil-operator-state)
+        (set-face-attribute 'doom-modeline-evil-operator-state nil
+                            :foreground "#bb9af7"))
+      (when (facep 'doom-modeline-evil-motion-state)
+        (set-face-attribute 'doom-modeline-evil-motion-state nil
+                            :foreground "#7dcfff"))
+      (when (facep 'doom-modeline-evil-emacs-state)
+        (set-face-attribute 'doom-modeline-evil-emacs-state nil
+                            :foreground "#e0af68")))
+
+    (defun taan/load-tokyo-theme (&optional frame)
+      (with-selected-frame (or frame (selected-frame))
+        (load-theme 'doom-tokyo-night t)
+        (set-face-foreground 'line-number-current-line "#ff9e64")
+        (taan/apply-tokyo-modeline)
+        (run-at-time 0.5 nil #'taan/apply-tokyo-modeline))
+      (remove-hook 'after-make-frame-functions #'taan/load-tokyo-theme))
+
+    (use-package doom-themes
+    :config
+    (setq doom-themes-enable-bold t
+          doom-themes-enable-italic t)
+    (if (daemonp)
+        (add-hook 'after-make-frame-functions #'taan/load-tokyo-theme)
+      (taan/load-tokyo-theme)))
+
+    (use-package doom-modeline
+    :init
+    (doom-modeline-mode 1)
+    :config
+    (setq doom-modeline-battery t
+          doom-modeline-icon t
+          doom-modeline-major-mode-icon t
+          doom-modeline-major-mode-color-icon t))
+#+end_src
+
+** Nerd Icons
+Doom modeline uses =nerd-icons= so we need that too.
+
+#+begin_src emacs-lisp
+    (use-package nerd-icons)
+#+end_src
+
+** Dashboard
+#+begin_src emacs-lisp
+    (use-package dashboard
+      :init
+      (setq dashboard-startup-banner (expand-file-name "banner.txt" user-emacs-directory)
+            dashboard-banner-logo-title "Welcome, TAAN"
+            dashboard-center-content t
+            dashboard-show-shortcuts nil
+            dashboard-set-heading-icons t
+            dashboard-set-file-icons t
+            dashboard-footer-messages '("Happy hacking!"
+                                        "One buffer to rule them all."
+                                        "C-x C-c and the dream is over.")
+            dashboard-items '((recents  . 5)
+                              (projects . 5)
+                              (bookmarks . 5))
+            initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+      :config
+      (dashboard-setup-startup-hook)
+      (set-face-attribute 'dashboard-heading-face nil :foreground "#7aa2f7" :weight 'bold)
+      (set-face-attribute 'dashboard-items-face nil :foreground "#a9b1d6")
+      (set-face-attribute 'dashboard-banner-logo-title-face nil :foreground "#bb9af7" :weight 'bold :height 1.2))
+#+end_src

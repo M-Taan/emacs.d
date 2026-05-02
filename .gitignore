@@ -19,15 +19,6 @@ tramp
 /eshell/history
 /eshell/lastdir
 
-# elpa packages
-/elpa/
-
-# reftex files
-*.rel
-
-# AUCTeX auto folder
-/auto/
-
 # cask packages
 .cask/
 
@@ -46,7 +37,6 @@ flycheck_*.el
 session.*
 .session
 network-security.data
-elpy/
 cider-history
 .smex-items
 projectile-bookmarks.eld
@@ -55,7 +45,7 @@ recentf
 ido.last
 /transient
 
-# prescient
+# prescient (legacy)
 var/
 
 projectile.cache
@@ -68,11 +58,27 @@ bookmarks
 *.plist
 persist/**
 projects
+
+# native compilation
 eln-cache
 
+# tangled output
+modules/*.el
 README.el
 README.org.*
 
+# language servers
 zig-lsp/
 odin-lsp/
+
+# AI tools
 .aider*
+
+# straight.el
+/straight/
+/elpa/
+backups/
+auto-save-list/
+dist/
+tree-sitter/
+history

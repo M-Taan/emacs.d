@@ -1,0 +1,26 @@
+* Typescript
+Using Emacs built-in typescript-ts-mode with tree-sitter.
+
+#+begin_src emacs-lisp
+  (use-package add-node-modules-path)
+
+  (use-package prettier-js)
+
+  (defun prettier-js-hook ()
+    (when (and (buffer-file-name)
+               (string-match-p (rx (or ".js" ".ts" ".jsx" ".tsx") eos)
+                               (buffer-file-name)))
+      (add-node-modules-path)
+      (prettier-js-mode)))
+
+  (use-package typescript-ts-mode
+    :straight nil
+    :hook
+    (typescript-ts-mode . prettier-js-hook)
+    (tsx-ts-mode . prettier-js-hook)
+    (typescript-ts-mode . lsp-deferred)
+    (tsx-ts-mode . lsp-deferred)
+    :mode
+    ("\\.ts\\'" . typescript-ts-mode)
+    ("\\.tsx\\'" . tsx-ts-mode))
+#+end_src

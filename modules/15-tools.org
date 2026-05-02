@@ -1,0 +1,24 @@
+* Tools
+** Magit
+#+begin_src emacs-lisp
+  (use-package magit
+    :defer t
+    :bind ("C-x g" . magit-status))
+#+end_src
+
+** Projectile
+#+begin_src emacs-lisp
+  (use-package projectile
+    :defer 1
+    :init (projectile-mode +1)
+    :custom
+    (projectile-completion-system 'default))
+#+end_src
+
+** Stumpwm
+LONG LIVE THE ONE AND TRUE WINDOW MANAGER
+
+#+begin_src emacs-lisp
+  (use-package stumpwm-mode
+    :defer t)
+#+end_src

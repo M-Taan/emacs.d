@@ -1,0 +1,5 @@
+* C
+#+begin_src emacs-lisp
+  (use-package clang-format
+    :defer t)
+#+end_src

@@ -3,7 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(doom-tokyo-night))
+ '(custom-enabled-themes nil)
  '(custom-safe-themes
    '("720838034f1dd3b3da66f6bd4d053ee67c93a747b219d1c546c41c4e425daf93"
      "0d2c5679b6d087686dcfd4d7e57ed8e8aedcccc7f1a478cd69704c02e4ee36fe"
@@ -121,21 +121,7 @@
  '(grep-find-ignored-directories
    '("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN"
      "_darcs" "{arch}" "node_modules"))
- '(inhibit-startup-screen t)
- '(package-selected-packages
-   '(add-node-modules-path aider aidermacs cider clang-format
-			   clojure-mode company company-prescient
-			   counsel doom-modeline doom-themes evil
-			   evil-collection flycheck gptel ivy
-			   ivy-prescient lsp-inline-errors lsp-ivy
-			   lsp-mode lsp-ui magit minuet odin-mode
-			   org-bullets org-gcal org-static-blog
-			   paredit plz prescient prettier-js
-			   projectile stumpwm-mode tagedit web-mode
-			   xclip yasnippet zig-mode))
- '(package-vc-selected-packages
-   '((odin-mode :vc-backend Git :url
-		"https://git.sr.ht/~mgmarlow/odin-mode"))))
+ '(inhibit-startup-screen t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -1,0 +1,40 @@
+* LSP
+Language Server Protocol support.
+
+#+begin_src emacs-lisp
+    (use-package lsp-mode
+      :commands lsp lsp-deferred
+      :hook
+      (clojure-mode . lsp-deferred)
+      (clojurescript-mode . lsp-deferred)
+      (clojurec-mode . lsp-deferred)
+      (typescript-ts-mode . lsp-deferred)
+      (tsx-ts-mode . lsp-deferred)
+      (python-mode . lsp-deferred)
+      (zig-mode . lsp-deferred)
+      :config
+      (setq lsp-headerline-breadcrumb-enable nil
+            lsp-enable-indentation nil
+            lsp-use-plists t
+            lsp-modeline-code-actions-enable t
+            lsp-modeline-diagnostics-enable t
+            lsp-diagnostics-provider :flycheck
+            lsp-zig-zls-executable (concat user-emacs-directory "/zig-lsp/zls/zig-out/bin/zls"))
+      (lsp-modeline-diagnostics-mode t)
+      (lsp-completion-mode -1))
+
+    (use-package consult-lsp
+      :after (lsp-mode consult))
+
+    (use-package lsp-ui
+      :hook (lsp-mode . lsp-ui-mode)
+      :config
+      (set-face-attribute 'lsp-ui-sideline-global nil
+                          :background "black")
+      (setq lsp-ui-doc-enable nil)
+      :custom
+      (lsp-ui-sideline-show-diagnostics t)
+      (lsp-ui-doc-position 'top))
+
+    (use-package flycheck)
+#+end_src

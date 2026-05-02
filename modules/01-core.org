@@ -1,0 +1,91 @@
+* Core Settings — Base Configuration
+** Custom
+Have a dedicated file for the Custom settings
+
+#+begin_src emacs-lisp
+  (setq custom-file "~/.emacs.d/custom.el")
+  (load custom-file)
+#+end_src
+
+** Font
+#+begin_src emacs-lisp
+  (add-to-list 'default-frame-alist
+               '(font . "JetBrainsMono Nerd Font-12"))
+#+end_src
+
+** Clutter-less Emacs UI
+#+begin_src emacs-lisp
+  (fset 'yes-or-no-p 'y-or-n-p)
+  (setq create-lockfiles nil)
+  (menu-bar-mode 0)
+  (tool-bar-mode 0)
+  (scroll-bar-mode -1)
+  (blink-cursor-mode 0)
+  (display-battery-mode 1)
+  (setq-default cursor-type 'bar)
+  (setq ring-bell-function 'ignore)
+#+end_src
+
+** Backups and Saving
+#+begin_src emacs-lisp
+  (setq backup-directory-alist `(("." . ,(concat user-emacs-directory
+                                                 "backups"))))
+  (setq auto-save-default nil)
+#+end_src
+
+** Highlighting and Quick Editing
+#+begin_src emacs-lisp
+  (global-hl-line-mode 1)
+  (subword-mode 1)
+  (electric-indent-mode +1)
+  (electric-pair-mode t)
+  (delete-selection-mode 1)
+  (global-display-line-numbers-mode 1)
+  (setq display-line-numbers-type 'relative)
+  (setq scroll-margin 10)
+#+end_src
+
+** Grep
+Automatically switch to the grep buffer
+
+#+begin_src emacs-lisp
+  (add-hook 'grep-mode-hook
+            #'(lambda ()
+                (switch-to-buffer-other-window "*grep*")))
+#+end_src
+
+** Tmux
+Opening tmux sessions from emacs at point or at the current directory.
+Uses projectile.
+
+#+begin_src emacs-lisp
+  (defun tmux-session-exists? (session)
+    (eq 0 (shell-command
+           (concat "tmux list-sessions -F '#{session_name}' 2>/dev/null | "
+                   "grep -qFx " (shell-quote-argument session)))))
+
+  (defun open-tmux-session-current-directory ()
+    (interactive)
+    (let* ((name (replace-regexp-in-string "\\." "" (projectile-project-name)))
+           (attach-session? (tmux-session-exists? name)))
+      (if attach-session?
+          (start-process-shell-command "tmux" nil (concat "alacritty -e tmux attach -t " name))
+        (start-process-shell-command "tmux" nil (concat "alacritty -e tmux new-session -s " name)))))
+
+  (defun open-tmux-session-current-project-root ()
+    (interactive)
+    (let* ((name (replace-regexp-in-string "\\." "" (projectile-project-name)))
+           (attach-session? (tmux-session-exists? name)))
+      (if attach-session?
+          (start-process-shell-command "tmux" nil (concat "alacritty -e tmux attach -t " name))
+        (start-process-shell-command "tmux" nil (concat "alacritty -e tmux new-session -s " name " -c " (projectile-project-root))))))
+#+end_src
+
+** GC Threshold Reset
+Reset garbage collection threshold after init for better runtime performance.
+
+#+begin_src emacs-lisp
+  (add-hook 'emacs-startup-hook
+            (lambda ()
+              (setq gc-cons-threshold (* 8 1024 1024))))
+#+end_src
